@@ -1,0 +1,51 @@
+# UserControl
+
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+
+재사용 화면·부분 뷰를 만드는 기본 WPF 컨테이너입니다. NavigationView의 페이지로도 사용할 수 있습니다.
+
+**타입:** 기본 WPF 타입 (`System.Windows.Controls` 또는 `System.Windows`) · **선언:** 기본 XAML 네임스페이스
+
+## 사용 예제
+
+XAML 조각은 [시작하기](GettingStarted.md)의 `xmlns:ui`·`xmlns:x` 선언을 전제로 합니다. `local:`은 앱의 화면 클래스 네임스페이스입니다.
+
+```xml
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="QuickStart.SettingsPage"><Grid><TextBlock Text="설정 화면" /></Grid></UserControl>
+```
+
+### C#에서 변경하기
+
+`using ui = Wpf.Ui.Controls;`를 추가합니다. 별도 설명이 없으면 위 XAML과 같은 창·뷰의 메서드 본문이며, `await`가 있으면 `async Task` 또는 이벤트 처리기 안에서 호출합니다.
+
+```csharp
+// UserControl 파생 클래스의 메서드 본문입니다.
+Content = new System.Windows.Controls.TextBlock { Text = "설정 변경" };
+```
+
+## 속성과 화면 변화
+
+이 타입이 새로 추가하는 공개 인스턴스 속성은 없습니다. 아래 상속 속성으로 구성합니다.
+
+### 자주 쓰는 기본 WPF 속성
+
+| 속성 | 타입 | 효과 |
+| --- | --- | --- |
+| `Content` | `object` | 본문 문자열 또는 단일 UI 요소입니다. 여러 요소는 Grid·StackPanel로 묶습니다. |
+| `ContentTemplate` | `DataTemplate` | 본문 데이터의 표시 방식을 지정합니다. |
+| `HorizontalContentAlignment / VerticalContentAlignment` | `HorizontalAlignment / VerticalAlignment` | 컨트롤 안에서 본문을 정렬합니다. 컨트롤 자체 위치를 정하는 Alignment와 구분합니다. |
+
+크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+## 동작과 주의 사항
+
+WPF-UI가 별도의 UserControl 타입을 제공하지는 않습니다. 기본 WPF 타입을 사용하고 자식 컨트롤에 테마를 적용합니다.
+
+## 확인한 소스
+
+기준: WPF UI **4.3.0**, 커밋 `153baadeaf475875a81a4605881ca5c2dbe53972`.
+
+- [SamplePage1.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui.Gallery/Views/Pages/Samples/SamplePage1.xaml)
+- 이 이름의 독립 Gallery 페이지는 없습니다. 위 구현·스타일을 기준으로 작성했습니다.

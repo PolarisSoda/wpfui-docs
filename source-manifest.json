@@ -1,0 +1,4096 @@
+{
+  "upstream": {
+    "repository": "lepoco/wpfui",
+    "version": "4.3.0",
+    "commit": "153baadeaf475875a81a4605881ca5c2dbe53972",
+    "checked_on": "2026-11-25"
+  },
+  "pages": [
+    {
+      "name": "AccessText",
+      "category": "텍스트",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/AccessText/AccessText.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Anchor",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Anchor/Anchor.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/AnchorPage.xaml"
+      ]
+    },
+    {
+      "name": "Arc",
+      "category": "레이아웃",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "StartAngle",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "0.0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Arc/Arc.cs"
+        },
+        {
+          "name": "EndAngle",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "0.0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Arc/Arc.cs"
+        },
+        {
+          "name": "SweepDirection",
+          "type": "SweepDirection",
+          "static": false,
+          "writable": true,
+          "default": "SweepDirection.Clockwise",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Arc/Arc.cs"
+        },
+        {
+          "name": "IsLargeArc",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/Arc/Arc.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Arc/Arc.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "AutoSuggestBox",
+      "category": "텍스트",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "OriginalItemsSource",
+          "type": "IList",
+          "static": false,
+          "writable": true,
+          "default": "Array.Empty<object>()",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "IsSuggestionListOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "Text",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "PlaceholderText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "MaxSuggestionListHeight",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "UpdateTextOnSelect",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "ClearButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        },
+        {
+          "name": "FocusCommand",
+          "type": "ICommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.cs",
+        "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Text/AutoSuggestBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "Badge",
+      "category": "상태와 알림",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Appearance",
+          "type": "Controls.ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "Controls.ControlAppearance.Primary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Badge/Badge.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Badge/Badge.cs",
+        "src/Wpf.Ui/Controls/Badge/Badge.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "BreadcrumbBar",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBar.cs"
+        },
+        {
+          "name": "Command",
+          "type": "ICommand?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBar.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBar.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Navigation/BreadcrumbBarPage.xaml"
+      ]
+    },
+    {
+      "name": "BreadcrumbBarItem",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBarItem.cs"
+        },
+        {
+          "name": "IconMargin",
+          "type": "Thickness",
+          "static": false,
+          "writable": true,
+          "default": "new Thickness(0)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBarItem.cs"
+        },
+        {
+          "name": "IsLast",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBarItem.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBarItem.cs",
+        "src/Wpf.Ui/Controls/BreadcrumbBar/BreadcrumbBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Button",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        },
+        {
+          "name": "Appearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Primary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        },
+        {
+          "name": "MouseOverBackground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "Border.BackgroundProperty.DefaultMetadata.DefaultValue",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        },
+        {
+          "name": "MouseOverBorderBrush",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "Border.BorderBrushProperty.DefaultMetadata.DefaultValue",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        },
+        {
+          "name": "PressedForeground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "SystemColors.ControlTextBrush",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        },
+        {
+          "name": "PressedBackground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "Border.BackgroundProperty.DefaultMetadata.DefaultValue",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        },
+        {
+          "name": "PressedBorderBrush",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "Border.BorderBrushProperty.DefaultMetadata.DefaultValue",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        },
+        {
+          "name": "CornerRadius",
+          "type": "CornerRadius",
+          "static": false,
+          "writable": true,
+          "default": "default(CornerRadius)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Button/Button.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Button/Button.cs",
+        "src/Wpf.Ui/Controls/Button/Button.xaml",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/ButtonPage.xaml"
+      ]
+    },
+    {
+      "name": "Calendar",
+      "category": "날짜와 시간",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Calendar/Calendar.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DateAndTime/CalendarPage.xaml"
+      ]
+    },
+    {
+      "name": "CalendarDatePicker",
+      "category": "날짜와 시간",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsTodayHighlighted",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CalendarDatePicker/CalendarDatePicker.cs"
+        },
+        {
+          "name": "IsCalendarOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CalendarDatePicker/CalendarDatePicker.cs"
+        },
+        {
+          "name": "FirstDayOfWeek",
+          "type": "DayOfWeek",
+          "static": false,
+          "writable": true,
+          "default": "DateTimeHelper.GetCurrentDateFormat().FirstDayOfWeek",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CalendarDatePicker/CalendarDatePicker.cs"
+        },
+        {
+          "name": "Date",
+          "type": "DateTime?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CalendarDatePicker/CalendarDatePicker.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/CalendarDatePicker/CalendarDatePicker.cs",
+        "src/Wpf.Ui/Controls/CalendarDatePicker/CalendarDatePicker.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DateAndTime/CalendarDatePickerPage.xaml"
+      ]
+    },
+    {
+      "name": "Card",
+      "category": "레이아웃",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Footer",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Card/Card.cs"
+        },
+        {
+          "name": "HasFooter",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Card/Card.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Card/Card.cs",
+        "src/Wpf.Ui/Controls/Card/Card.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "CardAction",
+      "category": "레이아웃",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsChevronVisible",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardAction/CardAction.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardAction/CardAction.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/CardAction/CardAction.cs",
+        "src/Wpf.Ui/Controls/CardAction/CardAction.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Layout/CardActionPage.xaml"
+      ]
+    },
+    {
+      "name": "CardColor",
+      "category": "레이아웃",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Title",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardColor/CardColor.cs"
+        },
+        {
+          "name": "Subtitle",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardColor/CardColor.cs"
+        },
+        {
+          "name": "SubtitleFontSize",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "11.0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardColor/CardColor.cs"
+        },
+        {
+          "name": "Color",
+          "type": "Color",
+          "static": false,
+          "writable": true,
+          "default": "Color.FromArgb(0, 0, 0, 0)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardColor/CardColor.cs"
+        },
+        {
+          "name": "Brush",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "Brushes.Transparent",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardColor/CardColor.cs"
+        },
+        {
+          "name": "CardBrush",
+          "type": "Brush",
+          "static": false,
+          "writable": false,
+          "default": "Brushes.Transparent",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardColor/CardColor.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/CardColor/CardColor.cs",
+        "src/Wpf.Ui/Controls/CardColor/CardColor.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "CardControl",
+      "category": "레이아웃",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Header",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardControl/CardControl.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardControl/CardControl.cs"
+        },
+        {
+          "name": "CornerRadius",
+          "type": "CornerRadius",
+          "static": false,
+          "writable": true,
+          "default": "new CornerRadius(0)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardControl/CardControl.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/CardControl/CardControl.cs",
+        "src/Wpf.Ui/Controls/CardControl/CardControl.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Layout/CardControlPage.xaml"
+      ]
+    },
+    {
+      "name": "CardExpander",
+      "category": "레이아웃",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardExpander/CardExpander.cs"
+        },
+        {
+          "name": "CornerRadius",
+          "type": "CornerRadius",
+          "static": false,
+          "writable": true,
+          "default": "new CornerRadius(4)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardExpander/CardExpander.cs"
+        },
+        {
+          "name": "ContentPadding",
+          "type": "Thickness",
+          "static": false,
+          "writable": true,
+          "default": "default(Thickness)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/CardExpander/CardExpander.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/CardExpander/CardExpander.cs",
+        "src/Wpf.Ui/Controls/CardExpander/CardExpander.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "CheckBox",
+      "category": "기본 입력",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/CheckBox/CheckBox.xaml",
+        "src/Wpf.Ui/Controls/DataGrid/DataGrid.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/CheckBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "ClientAreaBorder",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "ApplicationTheme",
+          "type": "ApplicationTheme",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/ClientAreaBorder/ClientAreaBorder.cs"
+        },
+        {
+          "name": "PaddedBorderThickness",
+          "type": "Thickness",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/ClientAreaBorder/ClientAreaBorder.cs"
+        },
+        {
+          "name": "ResizeFrameBorderThickness",
+          "type": "Thickness",
+          "static": true,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/ClientAreaBorder/ClientAreaBorder.cs"
+        },
+        {
+          "name": "WindowChromeNonClientFrameThickness",
+          "type": "Thickness",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/ClientAreaBorder/ClientAreaBorder.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ClientAreaBorder/ClientAreaBorder.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "ComboBox",
+      "category": "기본 입력",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ComboBox/ComboBox.xaml",
+        "src/Wpf.Ui/Controls/DataGrid/DataGrid.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/ComboBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "ContentDialog",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Title",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "TitleTemplate",
+          "type": "DataTemplate?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DialogWidth",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "double.PositiveInfinity",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DialogHeight",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "double.PositiveInfinity",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DialogMaxWidth",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "double.PositiveInfinity",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DialogMaxHeight",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "double.PositiveInfinity",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DialogMargin",
+          "type": "Thickness",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "PrimaryButtonText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "SecondaryButtonText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "CloseButtonText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "\"Close\"",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "PrimaryButtonIcon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "SecondaryButtonIcon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "CloseButtonIcon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "IsPrimaryButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "IsSecondaryButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "PrimaryButtonAppearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Primary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "SecondaryButtonAppearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Secondary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "CloseButtonAppearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Secondary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DefaultButton",
+          "type": "ContentDialogButton",
+          "static": false,
+          "writable": true,
+          "default": "ContentDialogButton.Primary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "IsFooterVisible",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "IsLegacyHost",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "true",
+          "kind": "RegisterReadOnly",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DialogHost",
+          "type": "ContentPresenter?",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "DialogHostEx",
+          "type": "ContentDialogHost?",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        },
+        {
+          "name": "ContentPresenter",
+          "type": "ContentPresenter?",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.cs",
+        "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.FocusBehavior.cs",
+        "src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DialogsAndFlyouts/ContentDialogPage.xaml"
+      ]
+    },
+    {
+      "name": "ContentDialogHost",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsDisableSiblingsEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ContentDialog/ContentDialogHost.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ContentDialog/ContentDialogHost.cs",
+        "src/Wpf.Ui/Controls/ContentDialog/ContentDialogHost.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "ContextMenu",
+      "category": "탐색",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ContextMenu/ContextMenu.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "DataGrid",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "CheckBoxColumnElementStyle",
+          "type": "Style?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DataGrid/DataGrid.cs"
+        },
+        {
+          "name": "CheckBoxColumnEditingElementStyle",
+          "type": "Style?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DataGrid/DataGrid.cs"
+        },
+        {
+          "name": "ComboBoxColumnElementStyle",
+          "type": "Style?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DataGrid/DataGrid.cs"
+        },
+        {
+          "name": "ComboBoxColumnEditingElementStyle",
+          "type": "Style?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DataGrid/DataGrid.cs"
+        },
+        {
+          "name": "TextColumnElementStyle",
+          "type": "Style?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DataGrid/DataGrid.cs"
+        },
+        {
+          "name": "TextColumnEditingElementStyle",
+          "type": "Style?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DataGrid/DataGrid.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/DataGrid/DataGrid.cs",
+        "src/Wpf.Ui/Controls/DataGrid/DataGrid.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Collections/DataGridPage.xaml"
+      ]
+    },
+    {
+      "name": "DatePicker",
+      "category": "날짜와 시간",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/DatePicker/DatePicker.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DateAndTime/DatePickerPage.xaml"
+      ]
+    },
+    {
+      "name": "DropDownButton",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Flyout",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DropDownButton/DropDownButton.cs"
+        },
+        {
+          "name": "IsDropDownOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DropDownButton/DropDownButton.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/DropDownButton/DropDownButton.cs",
+        "src/Wpf.Ui/Controls/DropDownButton/DropDownButton.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/DropDownButtonPage.xaml"
+      ]
+    },
+    {
+      "name": "DynamicScrollBar",
+      "category": "가상화와 스크롤",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsScrolling",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DynamicScrollBar/DynamicScrollBar.cs"
+        },
+        {
+          "name": "IsInteracted",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DynamicScrollBar/DynamicScrollBar.cs"
+        },
+        {
+          "name": "Timeout",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "1000",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DynamicScrollBar/DynamicScrollBar.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/DynamicScrollBar/DynamicScrollBar.cs",
+        "src/Wpf.Ui/Controls/DynamicScrollBar/DynamicScrollBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "DynamicScrollViewer",
+      "category": "가상화와 스크롤",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsScrollingVertically",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DynamicScrollViewer/DynamicScrollViewer.cs"
+        },
+        {
+          "name": "IsScrollingHorizontally",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DynamicScrollViewer/DynamicScrollViewer.cs"
+        },
+        {
+          "name": "MinimalChange",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "40d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DynamicScrollViewer/DynamicScrollViewer.cs"
+        },
+        {
+          "name": "Timeout",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "1200",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/DynamicScrollViewer/DynamicScrollViewer.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/DynamicScrollViewer/DynamicScrollViewer.cs",
+        "src/Wpf.Ui/Controls/DynamicScrollViewer/DynamicScrollViewer.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "EffectThicknessDecorator",
+      "category": "레이아웃",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "AnimationDelay",
+          "type": "TimeSpan",
+          "static": false,
+          "writable": true,
+          "default": "TimeSpan.Zero",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/EffectThicknessDecorator.cs"
+        },
+        {
+          "name": "AnimationElement",
+          "type": "UIElement?",
+          "static": false,
+          "writable": true,
+          "default": "default(UIElement)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/EffectThicknessDecorator.cs"
+        },
+        {
+          "name": "Thickness",
+          "type": "Thickness",
+          "static": false,
+          "writable": true,
+          "default": "new Thickness(35)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/EffectThicknessDecorator.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/EffectThicknessDecorator.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Expander",
+      "category": "레이아웃",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Expander/Expander.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Layout/ExpanderPage.xaml"
+      ]
+    },
+    {
+      "name": "FluentWindow",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "WindowCornerPreference",
+          "type": "WindowCornerPreference",
+          "static": false,
+          "writable": true,
+          "default": "WindowCornerPreference.Round",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/FluentWindow/FluentWindow.cs"
+        },
+        {
+          "name": "WindowBackdropType",
+          "type": "WindowBackdropType",
+          "static": false,
+          "writable": true,
+          "default": "WindowBackdropType.None",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/FluentWindow/FluentWindow.cs"
+        },
+        {
+          "name": "ExtendsContentIntoTitleBar",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/FluentWindow/FluentWindow.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/FluentWindow/FluentWindow.cs",
+        "src/Wpf.Ui/Controls/FluentWindow/FluentWindow.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Windows/MainWindow.xaml"
+      ]
+    },
+    {
+      "name": "Flyout",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Flyout/Flyout.cs"
+        },
+        {
+          "name": "Placement",
+          "type": "PlacementMode",
+          "static": false,
+          "writable": true,
+          "default": "PlacementMode.Top",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Flyout/Flyout.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Flyout/Flyout.cs",
+        "src/Wpf.Ui/Controls/Flyout/Flyout.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DialogsAndFlyouts/FlyoutPage.xaml"
+      ]
+    },
+    {
+      "name": "FontIcon",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "FontFamily",
+          "type": "FontFamily",
+          "static": false,
+          "writable": true,
+          "default": "SystemFonts.MessageFontFamily",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/FontIcon.cs"
+        },
+        {
+          "name": "FontSize",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/IconElement/FontIcon.cs"
+        },
+        {
+          "name": "FontStyle",
+          "type": "FontStyle",
+          "static": false,
+          "writable": true,
+          "default": "FontStyles.Normal",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/FontIcon.cs"
+        },
+        {
+          "name": "FontWeight",
+          "type": "FontWeight",
+          "static": false,
+          "writable": true,
+          "default": "FontWeights.Normal",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/FontIcon.cs"
+        },
+        {
+          "name": "Glyph",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/FontIcon.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconElement/FontIcon.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DesignGuidance/IconsPage.xaml"
+      ]
+    },
+    {
+      "name": "FontIconSource",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "FontFamily",
+          "type": "FontFamily",
+          "static": false,
+          "writable": true,
+          "default": "SystemFonts.MessageFontFamily",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/FontIconSource.cs"
+        },
+        {
+          "name": "FontSize",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "SystemFonts.MessageFontSize",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/FontIconSource.cs"
+        },
+        {
+          "name": "FontWeight",
+          "type": "FontWeight",
+          "static": false,
+          "writable": true,
+          "default": "FontWeights.Normal",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/FontIconSource.cs"
+        },
+        {
+          "name": "FontStyle",
+          "type": "FontStyle",
+          "static": false,
+          "writable": true,
+          "default": "FontStyles.Normal",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/FontIconSource.cs"
+        },
+        {
+          "name": "Glyph",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/FontIconSource.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconSource/FontIconSource.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Frame",
+      "category": "탐색",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Frame/Frame.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "GridView",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/GridView/GridView.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "GridViewColumn",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "MinWidth",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "0.0",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/GridView/GridViewColumn.cs"
+        },
+        {
+          "name": "MaxWidth",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "double.PositiveInfinity",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/GridView/GridViewColumn.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/GridView/GridViewColumn.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "GridViewColumnHeader",
+      "category": "목록과 데이터",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [],
+      "gallery_files": []
+    },
+    {
+      "name": "GridViewHeaderRowPresenter",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/GridView/GridViewHeaderRowPresenter.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "GridViewRowPresenter",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/GridView/GridViewRowPresenter.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "HyperlinkButton",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "NavigateUri",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/HyperlinkButton/HyperlinkButton.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/HyperlinkButton/HyperlinkButton.cs",
+        "src/Wpf.Ui/Controls/HyperlinkButton/HyperlinkButton.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/HyperlinkButtonPage.xaml"
+      ]
+    },
+    {
+      "name": "IconElement",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Foreground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/IconElement/IconElement.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconElement/IconElement.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "IconSource",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Foreground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "SystemColors.ControlTextBrush",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/IconSource.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconSource/IconSource.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "IconSourceElement",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IconSource",
+          "type": "IconSource?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/IconSourceElement.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconElement/IconSourceElement.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Image",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Source",
+          "type": "ImageSource?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Image/Image.cs"
+        },
+        {
+          "name": "Stretch",
+          "type": "Stretch",
+          "static": false,
+          "writable": true,
+          "default": "Stretch.Uniform",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Image/Image.cs"
+        },
+        {
+          "name": "StretchDirection",
+          "type": "StretchDirection",
+          "static": false,
+          "writable": true,
+          "default": "StretchDirection.Both",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Image/Image.cs"
+        },
+        {
+          "name": "CornerRadius",
+          "type": "CornerRadius",
+          "static": false,
+          "writable": true,
+          "default": "new CornerRadius(0)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Image/Image.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Image/Image.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Media/ImagePage.xaml"
+      ]
+    },
+    {
+      "name": "ImageIcon",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Source",
+          "type": "ImageSource?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/ImageIcon.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconElement/ImageIcon.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DesignGuidance/IconsPage.xaml"
+      ]
+    },
+    {
+      "name": "InfoBadge",
+      "category": "상태와 알림",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Severity",
+          "type": "InfoBadgeSeverity",
+          "static": false,
+          "writable": true,
+          "default": "InfoBadgeSeverity.Informational",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBadge/InfoBadge.cs"
+        },
+        {
+          "name": "Value",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBadge/InfoBadge.cs"
+        },
+        {
+          "name": "CornerRadius",
+          "type": "CornerRadius",
+          "static": false,
+          "writable": true,
+          "default": "new CornerRadius(8)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBadge/InfoBadge.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBadge/InfoBadge.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/InfoBadge/InfoBadge.cs",
+        "src/Wpf.Ui/Controls/InfoBadge/InfoBadge.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/StatusAndInfo/InfoBadgePage.xaml"
+      ]
+    },
+    {
+      "name": "InfoBar",
+      "category": "상태와 알림",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsClosable",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBar/InfoBar.cs"
+        },
+        {
+          "name": "IsOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBar/InfoBar.cs"
+        },
+        {
+          "name": "Title",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBar/InfoBar.cs"
+        },
+        {
+          "name": "Message",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBar/InfoBar.cs"
+        },
+        {
+          "name": "Severity",
+          "type": "InfoBarSeverity",
+          "static": false,
+          "writable": true,
+          "default": "InfoBarSeverity.Informational",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBar/InfoBar.cs"
+        },
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/InfoBar/InfoBar.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/InfoBar/InfoBar.cs",
+        "src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/StatusAndInfo/InfoBarPage.xaml"
+      ]
+    },
+    {
+      "name": "ItemsControl",
+      "category": "목록과 데이터",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [],
+      "gallery_files": []
+    },
+    {
+      "name": "Label",
+      "category": "텍스트",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Label/Label.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Text/LabelPage.xaml"
+      ]
+    },
+    {
+      "name": "ListBox",
+      "category": "목록과 데이터",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ListBox/ListBox.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Collections/ListBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "ListBoxItem",
+      "category": "목록과 데이터",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ListBox/ListBoxItem.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "ListView",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "ViewState",
+          "type": "ListViewViewState",
+          "static": false,
+          "writable": true,
+          "default": "ListViewViewState.Default",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ListView/ListView.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ListView/ListView.cs",
+        "src/Wpf.Ui/Controls/ListView/ListView.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Collections/ListViewPage.xaml"
+      ]
+    },
+    {
+      "name": "ListViewItem",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ListView/ListViewItem.cs",
+        "src/Wpf.Ui/Controls/AutoSuggestBox/AutoSuggestBox.xaml",
+        "src/Wpf.Ui/Controls/ListView/ListViewItem.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "LoadingScreen",
+      "category": "상태와 알림",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/LoadingScreen/LoadingScreen.cs",
+        "src/Wpf.Ui/Controls/LoadingScreen/LoadingScreen.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Menu",
+      "category": "탐색",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Menu/Menu.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Navigation/MenuPage.xaml"
+      ]
+    },
+    {
+      "name": "MenuItem",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Icon",
+          "type": "IconElement",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/Menu/MenuItem.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Menu/MenuItem.cs",
+        "src/Wpf.Ui/Controls/Menu/MenuItem.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "MessageBox",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "ShowTitle",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "PrimaryButtonText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "SecondaryButtonText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "CloseButtonText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "\"Close\"",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "PrimaryButtonIcon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "SecondaryButtonIcon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "CloseButtonIcon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "PrimaryButtonAppearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Primary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "SecondaryButtonAppearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Secondary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "CloseButtonAppearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Secondary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "IsCloseButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "IsSecondaryButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "IsPrimaryButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        },
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/MessageBox/MessageBox.cs",
+        "src/Wpf.Ui/Controls/MessageBox/MessageBox.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DialogsAndFlyouts/MessageBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "NavigationView",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "SelectedItem",
+          "type": "INavigationViewItem?",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Base.cs"
+        },
+        {
+          "name": "CanGoBack",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Navigation.cs"
+        },
+        {
+          "name": "EnableDebugMessages",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "Header",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "HeaderVisibility",
+          "type": "Visibility",
+          "static": false,
+          "writable": true,
+          "default": "Visibility.Visible",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "AlwaysShowHeader",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "MenuItems",
+          "type": "IList",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "RegisterReadOnly",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "MenuItemsSource",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "FooterMenuItems",
+          "type": "IList",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "RegisterReadOnly",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "FooterMenuItemsSource",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "IsTopSeparatorVisible",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "IsFooterSeparatorVisible",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "ContentOverlay",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "IsBackEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "IsBackButtonVisible",
+          "type": "NavigationViewBackButtonVisible",
+          "static": false,
+          "writable": true,
+          "default": "NavigationViewBackButtonVisible.Auto",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "IsPaneToggleVisible",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "IsPaneOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "IsPaneVisible",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "OpenPaneLength",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "0D",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "CompactPaneLength",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "0D",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "PaneHeader",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "PaneTitle",
+          "type": "string?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "PaneFooter",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "PaneDisplayMode",
+          "type": "NavigationViewPaneDisplayMode",
+          "static": false,
+          "writable": true,
+          "default": "NavigationViewPaneDisplayMode.Left",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "AutoSuggestBox",
+          "type": "AutoSuggestBox?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "TitleBar",
+          "type": "TitleBar?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "BreadcrumbBar",
+          "type": "BreadcrumbBar?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "ItemTemplate",
+          "type": "ControlTemplate?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "TransitionDuration",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "200",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "Transition",
+          "type": "Transition",
+          "static": false,
+          "writable": true,
+          "default": "Transition.FadeInWithSlide",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        },
+        {
+          "name": "FrameMargin",
+          "type": "Thickness",
+          "static": false,
+          "writable": true,
+          "default": "default(Thickness)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/NavigationView/NavigationView.AttachedProperties.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationView.Base.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationView.Events.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationView.Navigation.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationView.TemplateParts.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationView.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Navigation/NavigationViewPage.xaml"
+      ]
+    },
+    {
+      "name": "NavigationViewContentPresenter",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "TransitionDuration",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "200",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewContentPresenter.cs"
+        },
+        {
+          "name": "Transition",
+          "type": "Transition",
+          "static": false,
+          "writable": true,
+          "default": "Transition.FadeInWithSlide",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewContentPresenter.cs"
+        },
+        {
+          "name": "IsDynamicScrollViewerEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewContentPresenter.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewContentPresenter.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewContentPresenter.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "NavigationViewItem",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "MenuItems",
+          "type": "IList",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "RegisterReadOnly",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "MenuItemsSource",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "HasMenuItems",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "false",
+          "kind": "RegisterReadOnly",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "IsActive",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "IsExpanded",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "IsPaneOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "TargetPageTag",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "TargetPageType",
+          "type": "Type?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "InfoBadge",
+          "type": "InfoBadge?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "NavigationCacheMode",
+          "type": "NavigationCacheMode",
+          "static": false,
+          "writable": true,
+          "default": "NavigationCacheMode.Disabled",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "NavigationViewItemParent",
+          "type": "INavigationViewItem?",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "IsMenuElement",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        },
+        {
+          "name": "Id",
+          "type": "string",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewItem.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewItemDefaultStyle.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "NavigationViewItemHeader",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Text",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItemHeader.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NavigationView/NavigationViewItemHeader.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewItemHeader.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewItemHeader.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "NavigationViewItemSeparator",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewItemSeparator.cs",
+        "src/Wpf.Ui/Controls/NavigationView/NavigationViewItemSeparator.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "NumberBox",
+      "category": "텍스트",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Value",
+          "type": "double?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "MaxDecimalPlaces",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "6",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "SmallChange",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "1.0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "LargeChange",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "10.0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "Maximum",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "double.MaxValue",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "Minimum",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "double.MinValue",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "AcceptsExpression",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "NumberFormatter",
+          "type": "INumberFormatter?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "SpinButtonPlacementMode",
+          "type": "NumberBoxSpinButtonPlacementMode",
+          "static": false,
+          "writable": true,
+          "default": "NumberBoxSpinButtonPlacementMode.Inline",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        },
+        {
+          "name": "ValidationMode",
+          "type": "NumberBoxValidationMode",
+          "static": false,
+          "writable": true,
+          "default": "NumberBoxValidationMode.InvalidInputOverwritten",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/NumberBox/NumberBox.cs",
+        "src/Wpf.Ui/Controls/NumberBox/NumberBox.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Text/NumberBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "Page",
+      "category": "뷰",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Page/Page.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "PassiveScrollViewer",
+      "category": "가상화와 스크롤",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsScrollSpillEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/PassiveScrollViewer.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/PassiveScrollViewer.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "PasswordBox",
+      "category": "텍스트",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Password",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/PasswordBox/PasswordBox.cs"
+        },
+        {
+          "name": "PasswordChar",
+          "type": "char",
+          "static": false,
+          "writable": true,
+          "default": "'*'",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/PasswordBox/PasswordBox.cs"
+        },
+        {
+          "name": "IsPasswordRevealed",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/PasswordBox/PasswordBox.cs"
+        },
+        {
+          "name": "RevealButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/PasswordBox/PasswordBox.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/PasswordBox/PasswordBox.cs",
+        "src/Wpf.Ui/Controls/PasswordBox/PasswordHelper.cs",
+        "src/Wpf.Ui/Controls/PasswordBox/PasswordBox.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Text/PasswordBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "ProgressBar",
+      "category": "상태와 알림",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ProgressBar/ProgressBar.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/StatusAndInfo/ProgressBarPage.xaml"
+      ]
+    },
+    {
+      "name": "ProgressRing",
+      "category": "상태와 알림",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Progress",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "50d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.cs"
+        },
+        {
+          "name": "IsIndeterminate",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.cs"
+        },
+        {
+          "name": "EngAngle",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "180.0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.cs"
+        },
+        {
+          "name": "IndeterminateAngle",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "180.0d",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.cs"
+        },
+        {
+          "name": "CoverRingStroke",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "Brushes.Black",
+          "kind": "RegisterAttached",
+          "file": "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.cs"
+        },
+        {
+          "name": "CoverRingVisibility",
+          "type": "System.Windows.Visibility",
+          "static": false,
+          "writable": true,
+          "default": "System.Windows.Visibility.Visible",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.cs",
+        "src/Wpf.Ui/Controls/ProgressRing/ProgressRing.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/StatusAndInfo/ProgressRingPage.xaml"
+      ]
+    },
+    {
+      "name": "RadioButton",
+      "category": "기본 입력",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/RadioButton/RadioButton.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/RadioButtonPage.xaml"
+      ]
+    },
+    {
+      "name": "RatingControl",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Value",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "0.0D",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/RatingControl/RatingControl.cs"
+        },
+        {
+          "name": "MaxRating",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "5",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/RatingControl/RatingControl.cs"
+        },
+        {
+          "name": "HalfStarEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/RatingControl/RatingControl.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/RatingControl/RatingControl.cs",
+        "src/Wpf.Ui/Controls/RatingControl/RatingControl.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "RichTextBox",
+      "category": "텍스트",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsTextSelectionEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/RichTextBox/RichTextBox.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/RichTextBox/RichTextBox.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Text/RichTextBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "ScrollBar",
+      "category": "가상화와 스크롤",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ScrollBar/ScrollBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "ScrollViewer",
+      "category": "가상화와 스크롤",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Menu/MenuItem.xaml",
+        "src/Wpf.Ui/Controls/ScrollViewer/ScrollViewer.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Separator",
+      "category": "레이아웃",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/DataGrid/DataGrid.xaml",
+        "src/Wpf.Ui/Controls/Menu/MenuItem.xaml",
+        "src/Wpf.Ui/Controls/Separator/Separator.xaml",
+        "src/Wpf.Ui/Controls/StatusBar/StatusBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Slider",
+      "category": "기본 입력",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Slider/Slider.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/SliderPage.xaml"
+      ]
+    },
+    {
+      "name": "Snackbar",
+      "category": "상태와 알림",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "IsCloseButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "SlideTransform",
+          "type": "TranslateTransform?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "IsShown",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "Timeout",
+          "type": "TimeSpan",
+          "static": false,
+          "writable": true,
+          "default": "TimeSpan.FromSeconds(2)",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "Title",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "TitleTemplate",
+          "type": "DataTemplate?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "Appearance",
+          "type": "ControlAppearance",
+          "static": false,
+          "writable": true,
+          "default": "ControlAppearance.Secondary",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "ContentForeground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "SystemColors.ControlTextBrush",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        },
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Snackbar/Snackbar.cs",
+        "src/Wpf.Ui/Controls/Snackbar/Snackbar.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DialogsAndFlyouts/SnackbarPage.xaml"
+      ]
+    },
+    {
+      "name": "SnackbarPresenter",
+      "category": "상태와 알림",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Content",
+          "type": "Snackbar?",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/Snackbar/SnackbarPresenter.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Snackbar/SnackbarPresenter.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "SplitButton",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Flyout",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/SplitButton/SplitButton.cs"
+        },
+        {
+          "name": "IsDropDownOpen",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/SplitButton/SplitButton.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/SplitButton/SplitButton.cs",
+        "src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/SplitButtonPage.xaml"
+      ]
+    },
+    {
+      "name": "StatusBar",
+      "category": "상태와 알림",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/StatusBar/StatusBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "SymbolIcon",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Symbol",
+          "type": "SymbolRegular",
+          "static": false,
+          "writable": true,
+          "default": "SymbolRegular.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/SymbolIcon.cs"
+        },
+        {
+          "name": "Filled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconElement/SymbolIcon.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconElement/SymbolIcon.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DesignGuidance/IconsPage.xaml"
+      ]
+    },
+    {
+      "name": "SymbolIconSource",
+      "category": "아이콘과 미디어",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "FontSize",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "SystemFonts.MessageFontSize",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/SymbolIconSource.cs"
+        },
+        {
+          "name": "FontWeight",
+          "type": "FontWeight",
+          "static": false,
+          "writable": true,
+          "default": "FontWeights.Normal",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/SymbolIconSource.cs"
+        },
+        {
+          "name": "FontStyle",
+          "type": "FontStyle",
+          "static": false,
+          "writable": true,
+          "default": "FontStyles.Normal",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/SymbolIconSource.cs"
+        },
+        {
+          "name": "Symbol",
+          "type": "SymbolRegular",
+          "static": false,
+          "writable": true,
+          "default": "SymbolRegular.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/SymbolIconSource.cs"
+        },
+        {
+          "name": "Filled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/IconSource/SymbolIconSource.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/IconSource/SymbolIconSource.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "TabControl",
+      "category": "탐색",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TabControl/TabControl.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Navigation/TabControlPage.xaml"
+      ]
+    },
+    {
+      "name": "TabItem",
+      "category": "탐색",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TabControl/TabControl.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "TabView",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TabView/TabView.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Navigation/TabViewPage.xaml"
+      ]
+    },
+    {
+      "name": "TabViewItem",
+      "category": "탐색",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TabView/TabViewItem.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "TextBlock",
+      "category": "텍스트",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "FontTypography",
+          "type": "FontTypography?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBlock/TextBlock.cs"
+        },
+        {
+          "name": "Appearance",
+          "type": "TextColor?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBlock/TextBlock.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TextBlock/TextBlock.cs"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Text/TextBlockPage.xaml"
+      ]
+    },
+    {
+      "name": "TextBox",
+      "category": "텍스트",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "IconPlacement",
+          "type": "ElementPlacement",
+          "static": false,
+          "writable": true,
+          "default": "ElementPlacement.Left",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "PlaceholderText",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "PlaceholderEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "CurrentPlaceholderEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "ClearButtonEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "ShowClearButton",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "IsTextSelectionEnabled",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        },
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TextBox/TextBox.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TextBox/TextBox.cs",
+        "src/Wpf.Ui/Controls/TextBox/TextBox.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Text/TextBoxPage.xaml"
+      ]
+    },
+    {
+      "name": "ThumbRate",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "State",
+          "type": "ThumbRateState",
+          "static": false,
+          "writable": true,
+          "default": "ThumbRateState.None",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ThumbRate/ThumbRate.cs"
+        },
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ThumbRate/ThumbRate.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ThumbRate/ThumbRate.cs",
+        "src/Wpf.Ui/Controls/ThumbRate/ThumbRate.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/ThumbRatePage.xaml"
+      ]
+    },
+    {
+      "name": "TimePicker",
+      "category": "날짜와 시간",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Header",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TimePicker/TimePicker.cs"
+        },
+        {
+          "name": "Time",
+          "type": "TimeSpan",
+          "static": false,
+          "writable": true,
+          "default": "TimeSpan.Zero",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TimePicker/TimePicker.cs"
+        },
+        {
+          "name": "SelectedTime",
+          "type": "TimeSpan?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TimePicker/TimePicker.cs"
+        },
+        {
+          "name": "MinuteIncrement",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "1",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TimePicker/TimePicker.cs"
+        },
+        {
+          "name": "ClockIdentifier",
+          "type": "ClockIdentifier",
+          "static": false,
+          "writable": true,
+          "default": "ClockIdentifier.Clock24Hour",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TimePicker/TimePicker.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TimePicker/TimePicker.cs",
+        "src/Wpf.Ui/Controls/TimePicker/TimePicker.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/DateAndTime/TimePickerPage.xaml"
+      ]
+    },
+    {
+      "name": "TitleBar",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "ApplicationTheme",
+          "type": "Appearance.ApplicationTheme",
+          "static": false,
+          "writable": true,
+          "default": "Appearance.ApplicationTheme.Unknown",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "Title",
+          "type": "string?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "Header",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "CenterContent",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "TrailingContent",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "ButtonsForeground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "SystemColors.ControlTextBrush",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "ButtonsBackground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "SystemColors.ControlBrush",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "IsMaximized",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "ForceShutdown",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "ShowMaximize",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "ShowMinimize",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "ShowHelp",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "ShowClose",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "CanMaximize",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "true",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "CloseWindowByDoubleClickOnIcon",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "TemplateButtonCommand",
+          "type": "IRelayCommand",
+          "static": false,
+          "writable": false,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "MaximizeActionOverride",
+          "type": "Action<TitleBar, System.Windows.Window>?",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        },
+        {
+          "name": "MinimizeActionOverride",
+          "type": "Action<TitleBar, System.Windows.Window>?",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TitleBar/TitleBar.cs",
+        "src/Wpf.Ui/Controls/TitleBar/TitleBar.WindowResize.cs",
+        "src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "TitleBarButton",
+      "category": "창과 대화상자",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "ButtonType",
+          "type": "TitleBarButtonType",
+          "static": false,
+          "writable": true,
+          "default": "TitleBarButtonType.Unknown",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBarButton.cs"
+        },
+        {
+          "name": "ButtonsForeground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "SystemColors.ControlTextBrush",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBarButton.cs"
+        },
+        {
+          "name": "MouseOverButtonsForeground",
+          "type": "Brush?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBarButton.cs"
+        },
+        {
+          "name": "RenderButtonsForeground",
+          "type": "Brush",
+          "static": false,
+          "writable": true,
+          "default": "SystemColors.ControlTextBrush",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBarButton.cs"
+        },
+        {
+          "name": "IsHovered",
+          "type": "bool",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/TitleBar/TitleBarButton.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TitleBar/TitleBarButton.cs",
+        "src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "ToggleButton",
+      "category": "기본 입력",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ComboBox/ComboBox.xaml",
+        "src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml",
+        "src/Wpf.Ui/Controls/ToggleButton/ToggleButton.xaml",
+        "src/Wpf.Ui/Controls/ToolBar/ToolBar.xaml",
+        "src/Wpf.Ui/Controls/TreeView/TreeViewItem.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/ToggleButtonPage.xaml"
+      ]
+    },
+    {
+      "name": "ToggleSwitch",
+      "category": "기본 입력",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "OffContent",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ToggleSwitch/ToggleSwitch.cs"
+        },
+        {
+          "name": "OnContent",
+          "type": "object?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ToggleSwitch/ToggleSwitch.cs"
+        },
+        {
+          "name": "LabelPosition",
+          "type": "ElementPlacement",
+          "static": false,
+          "writable": true,
+          "default": "ElementPlacement.Right",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/ToggleSwitch/ToggleSwitch.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ToggleSwitch/ToggleSwitch.cs",
+        "src/Wpf.Ui/Controls/ToggleSwitch/ToggleSwitch.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/BasicInput/ToggleSwitchPage.xaml"
+      ]
+    },
+    {
+      "name": "ToolBar",
+      "category": "레이아웃",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ToolBar/ToolBar.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "ToolTip",
+      "category": "상태와 알림",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/ToolTip/ToolTip.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/StatusAndInfo/ToolTipPage.xaml"
+      ]
+    },
+    {
+      "name": "TreeGrid",
+      "category": "실험적 타입",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Headers",
+          "type": "ObservableCollection<TreeGridHeader>?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TreeGrid/TreeGrid.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TreeGrid/TreeGrid.cs",
+        "src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "TreeGridHeader",
+      "category": "실험적 타입",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Title",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TreeGrid/TreeGridHeader.cs"
+        },
+        {
+          "name": "Group",
+          "type": "string",
+          "static": false,
+          "writable": true,
+          "default": "string.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TreeGrid/TreeGridHeader.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TreeGrid/TreeGridHeader.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "TreeGridItem",
+      "category": "실험적 타입",
+      "kind": "custom",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TreeGrid/TreeGridItem.cs",
+        "src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "TreeView",
+      "category": "목록과 데이터",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TreeView/TreeView.xaml"
+      ],
+      "gallery_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Collections/TreeViewPage.xaml"
+      ]
+    },
+    {
+      "name": "TreeViewItem",
+      "category": "목록과 데이터",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Icon",
+          "type": "IconElement?",
+          "static": false,
+          "writable": true,
+          "default": "null",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/TreeView/TreeViewItem.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/TreeView/TreeViewItem.cs",
+        "src/Wpf.Ui/Controls/TreeView/TreeViewItem.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "UserControl",
+      "category": "뷰",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui.Gallery/Views/Pages/Samples/SamplePage1.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "VirtualizingGridView",
+      "category": "가상화와 스크롤",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "Orientation",
+          "type": "Orientation",
+          "static": false,
+          "writable": true,
+          "default": "Orientation.Vertical",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingGridView/VirtualizingGridView.cs"
+        },
+        {
+          "name": "SpacingMode",
+          "type": "SpacingMode",
+          "static": false,
+          "writable": true,
+          "default": "SpacingMode.Uniform",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingGridView/VirtualizingGridView.cs"
+        },
+        {
+          "name": "StretchItems",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingGridView/VirtualizingGridView.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/VirtualizingGridView/VirtualizingGridView.cs",
+        "src/Wpf.Ui/Controls/VirtualizingGridView/VirtualizingGridView.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "VirtualizingItemsControl",
+      "category": "가상화와 스크롤",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "CacheLengthUnit",
+          "type": "VirtualizationCacheLengthUnit",
+          "static": false,
+          "writable": true,
+          "default": "VirtualizationCacheLengthUnit.Page",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingItemsControl/VirtualizingItemsControl.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/VirtualizingItemsControl/VirtualizingItemsControl.cs",
+        "src/Wpf.Ui/Controls/VirtualizingItemsControl/VirtualizingItemsControl.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "VirtualizingPanelBase",
+      "category": "가상화와 스크롤",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "ScrollOwner",
+          "type": "ScrollViewer?",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "CanVerticallyScroll",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "CanHorizontallyScroll",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "ScrollLineDelta",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "16.0",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "MouseWheelDelta",
+          "type": "double",
+          "static": false,
+          "writable": true,
+          "default": "48.0",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "ScrollLineDeltaItem",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "1",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "MouseWheelDeltaItem",
+          "type": "int",
+          "static": false,
+          "writable": true,
+          "default": "3",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "ExtentWidth",
+          "type": "double",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "ExtentHeight",
+          "type": "double",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "HorizontalOffset",
+          "type": "double",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "VerticalOffset",
+          "type": "double",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "ViewportWidth",
+          "type": "double",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        },
+        {
+          "name": "ViewportHeight",
+          "type": "double",
+          "static": false,
+          "writable": false,
+          "default": "",
+          "kind": "CLR",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingPanelBase.cs"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "VirtualizingWrapPanel",
+      "category": "가상화와 스크롤",
+      "kind": "custom",
+      "properties": [
+        {
+          "name": "SpacingMode",
+          "type": "SpacingMode",
+          "static": false,
+          "writable": true,
+          "default": "SpacingMode.Uniform",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingWrapPanel.cs"
+        },
+        {
+          "name": "Orientation",
+          "type": "Orientation",
+          "static": false,
+          "writable": true,
+          "default": "Orientation.Vertical",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingWrapPanel.cs"
+        },
+        {
+          "name": "ItemSize",
+          "type": "Size",
+          "static": false,
+          "writable": true,
+          "default": "Size.Empty",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingWrapPanel.cs"
+        },
+        {
+          "name": "StretchItems",
+          "type": "bool",
+          "static": false,
+          "writable": true,
+          "default": "false",
+          "kind": "Register",
+          "file": "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingWrapPanel.cs"
+        }
+      ],
+      "source_files": [
+        "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingWrapPanel.cs",
+        "src/Wpf.Ui/Controls/VirtualizingWrapPanel/VirtualizingWrapPanel.xaml"
+      ],
+      "gallery_files": []
+    },
+    {
+      "name": "Window",
+      "category": "뷰",
+      "kind": "wpf",
+      "properties": [],
+      "source_files": [
+        "src/Wpf.Ui/Controls/Window/Window.xaml"
+      ],
+      "gallery_files": []
+    }
+  ]
+}

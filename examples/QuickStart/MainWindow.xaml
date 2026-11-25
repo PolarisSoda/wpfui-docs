@@ -1,0 +1,32 @@
+<ui:FluentWindow x:Class="QuickStart.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:local="clr-namespace:QuickStart"
+    Title="WPF UI 문서 예제" Width="960" Height="640"
+    ExtendsContentIntoTitleBar="True" WindowBackdropType="None">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ui:TitleBar Title="WPF UI 4.3.0 · 한국어 예제" />
+            <ui:NavigationView x:Name="Navigation" Grid.Row="1"
+                PaneTitle="문서 예제" PaneDisplayMode="Left" OpenPaneLength="220">
+                <ui:NavigationView.MenuItems>
+                    <ui:NavigationViewItem Content="홈" TargetPageTag="home"
+                        TargetPageType="{x:Type local:HomePage}" NavigationCacheMode="Enabled"
+                        Icon="{ui:SymbolIcon Home24}" />
+                </ui:NavigationView.MenuItems>
+                <ui:NavigationView.FooterMenuItems>
+                    <ui:NavigationViewItem Content="설정" TargetPageTag="settings"
+                        TargetPageType="{x:Type local:SettingsPage}" NavigationCacheMode="Enabled"
+                        Icon="{ui:SymbolIcon Settings24}" />
+                </ui:NavigationView.FooterMenuItems>
+            </ui:NavigationView>
+        </Grid>
+        <ui:SnackbarPresenter x:Name="SnackbarHost" VerticalAlignment="Bottom" Margin="24" />
+        <ui:ContentDialogHost x:Name="DialogHost" IsDisableSiblingsEnabled="True" />
+    </Grid>
+</ui:FluentWindow>

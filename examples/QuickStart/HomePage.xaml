@@ -1,0 +1,13 @@
+<Page x:Class="QuickStart.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="홈" ui:NavigationView.HeaderContent="홈">
+    <StackPanel Margin="24">
+        <ui:TextBlock Text="WPF UI를 문서로 시작하기" FontTypography="Title" Margin="0,0,0,16" />
+        <ui:InfoBar IsOpen="True" IsClosable="False" Severity="Informational"
+            Title="예제 사용법" Message="설정 화면에서 속성과 대화상자를 시험하세요." Margin="0,0,0,16" />
+        <ui:Button Content="설정 화면 열기" Click="OpenSettings" HorizontalAlignment="Left"
+            Icon="{ui:SymbolIcon Settings24}" />
+    </StackPanel>
+</Page>
