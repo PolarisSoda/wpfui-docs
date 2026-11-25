@@ -1,6 +1,6 @@
 # TabView
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 기본 WPF TabControl·TabItem을 감싼 탭 컨테이너입니다. 4.3.0에는 추가 고유 속성이 없습니다.
 
@@ -44,6 +44,30 @@ Demo.SelectedIndex = 1;
 | `ContentTemplate` | `DataTemplate` | 선택된 탭 본문 데이터의 표시 방식입니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+4.3.0의 TabView는 TabControl 파생 빈 클래스이며 독립 WPF UI ControlTemplate을 제공하지 않습니다. 기본 WPF 타입용 암시적 Style은 파생 타입과 정확히 일치하지 않을 수 있으므로 테마 TabControl 스타일을 쓰려면 TabView용 Style을 만들고 BasedOn="{StaticResource {x:Type TabControl}}"으로 명시적으로 연결합니다. TabItem·TabViewItem도 별도로 고려합니다.
+
+### 기본 TabControl 테마 스타일을 명시적으로 연결
+
+<!-- customization:example TabView_Recipe1 -->
+```xml
+<ui:TabView>
+    <ui:TabView.Style>
+        <Style TargetType="{x:Type ui:TabView}" BasedOn="{StaticResource {x:Type TabControl}}" />
+    </ui:TabView.Style>
+    <TabItem Header="일반"><TextBlock Text="일반 설정" /></TabItem>
+    <TabItem Header="고급"><TextBlock Text="고급 설정" /></TabItem>
+</ui:TabView>
+```
+
+<!-- customization:example-end -->
+
+<!-- customization:end -->
 
 ## 동작과 주의 사항
 

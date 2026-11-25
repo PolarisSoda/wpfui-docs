@@ -1,6 +1,6 @@
 # SnackbarPresenter
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 Snackbar의 현재 표시·대기열·자동 숨김을 관리하는 표시 영역입니다.
 
@@ -41,6 +41,15 @@ await Demo.HideCurrent();
 | `void AddToQue(Snackbar snackbar)` | 스낵바를 대기열에 넣습니다. 철자는 API와 동일합니다. |
 | `Task ImmediatelyDisplay(Snackbar snackbar)` | 현재 표시를 숨기고 지정한 스낵바를 즉시 표시합니다. |
 | `Task HideCurrent()` | 현재 스낵바의 숨김 처리를 기다립니다. |
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+현재 표시 위치·최대 폭·Margin은 Presenter에, 알림의 배경·아이콘·내용은 Snackbar 인스턴스에 설정합니다. Content는 외부에서 대입할 수 없으므로 스타일 조정을 위해 Content에 새 컨트롤을 직접 넣는 대신 Snackbar 생성자와 Show 경로를 사용합니다.
+
+<!-- customization:end -->
 
 ## 동작과 주의 사항
 

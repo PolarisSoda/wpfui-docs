@@ -1,6 +1,6 @@
 # SplitButton
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 주 실행 영역과 메뉴 화살표를 분리한 버튼입니다.
 
@@ -65,6 +65,137 @@ menu.IsOpen = true;
 | `ClickMode` | `ClickMode` | Release·Press·Hover 중 클릭을 발생시킬 시점을 정합니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+주 버튼과 화살표 토글 버튼이 별도로 구성됩니다. 바깥 모서리·Appearance는 상속 Button 속성을 우선 사용하고, 분리선·화살표 영역의 색·폭은 보조 스타일과 템플릿에서 조정합니다. ControlTemplate 교체 시 `PART_Toggle`(Border)·`PART_ToggleButton`(ToggleButton)을 보존해야 합니다. PART_ToggleButton이 없으면 OnApplyTemplate에서 예외를 던집니다.
+
+### 이 컨트롤의 Resources에서 바꾸기
+
+`ButtonBackgroundDisabled`는 `SolidColorBrush` 타입의 DynamicResource 참조입니다. 아래는 해당 키가 참조되는 기본 템플릿·상태에 적용하는 예제입니다. 기존 로컬 속성값·사용자 Style이 이 경로를 대체했다면 해당 설정도 확인합니다.
+
+<!-- customization:example SplitButton_Resources -->
+```xml
+<ui:SplitButton Content="내보내기" x:Name="ResourceDemo">
+    <ui:SplitButton.Resources>
+        <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#2563EB" />
+    </ui:SplitButton.Resources>
+    <ui:SplitButton.Flyout>
+        <ContextMenu>
+            <MenuItem Header="PDF" />
+            <MenuItem Header="이미지" />
+        </ContextMenu>
+    </ui:SplitButton.Flyout>
+</ui:SplitButton>
+```
+
+```csharp
+ResourceDemo.Resources["ButtonBackgroundDisabled"] = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(37, 99, 235));
+```
+
+<!-- customization:example-end -->
+
+C# 조각은 위 XAML과 같은 창·뷰에서 실행합니다. Resources에 넣는 값의 **타입**을 유지해야 합니다. 자식 컨트롤도 같은 키를 조회하면 영향을 받을 수 있습니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `ButtonBackgroundDisabled` | SolidColorBrush | ContentBorder.Background〔IsEnabled=False〕 |
+| `ButtonBorderBrushDisabled` | SolidColorBrush | ContentBorder.BorderBrush〔IsEnabled=False〕 |
+| `ButtonForeground` | SolidColorBrush | 컨트롤.Foreground |
+| `ButtonForegroundDisabled` | SolidColorBrush | ContentPresenter.TextElement.Foreground〔IsEnabled=False〕 |
+| `DefaultSplitButtonToggleButtonStyle` | Style | ToggleButton Style |
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `ButtonIconMargin` | Thickness | ContentPresenter#ControlIcon Margin |
+| `DefaultUiButtonStyle` | Style | Style BasedOn |
+| `DefaultUiSplitButtonStyle` | Style | Style BasedOn |
+| `LeftSplitCornerRadiusConverter` | LeftSplitCornerRadiusConverter | Border CornerRadius |
+| `LeftSplitThicknessConverter` | LeftSplitThicknessConverter | Border BorderThickness |
+| `RightSplitCornerRadiusConverter` | RightSplitCornerRadiusConverter | Border CornerRadius |
+| `RightSplitThicknessConverter` | RightSplitThicknessConverter | Border BorderThickness |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 선택·확장할 수 있는 스타일 키
+
+| 키 | 대상 | 정의 |
+| --- | --- | --- |
+| `DefaultUiSplitButtonStyle` | `controls:SplitButton` | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+
+`Style="{StaticResource 키}"`로 선택하거나 새 Style의 BasedOn에 연결합니다. TargetType이 맞아야 하며 정의 파일이 실제 리소스 범위에 로드되어 있어야 합니다. 접두사 Default가 붙은 키도 앱에서 선택할 수 있지만 내부 구현 변경에 영향을 받을 수 있습니다.
+
+### 템플릿을 바꿀 때 유지할 연결
+
+C# 구현이 이름으로 찾는 부분: `PART_Toggle`, `PART_ToggleButton`. 이름과 요소 타입·명령·이벤트 연결을 함께 유지합니다.
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `Width` | `Border#ContentBorder.Width` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Height` | `Border#ContentBorder.Height` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `MinWidth` | `Border#ContentBorder.MinWidth` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `MinHeight` | `Border#ContentBorder.MinHeight` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `HorizontalAlignment` | `Border#ContentBorder.HorizontalAlignment` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `VerticalAlignment` | `Border#ContentBorder.VerticalAlignment` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `CornerRadius` | `Border#ContentBorder.CornerRadius` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Padding` | `Border.Padding` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Background` | `Border.Background` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `BorderBrush` | `Border.BorderBrush` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `BorderThickness` | `Border.BorderThickness` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `CornerRadius` | `Border.CornerRadius` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `HorizontalContentAlignment` | `Grid.HorizontalAlignment` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `VerticalContentAlignment` | `Grid.VerticalAlignment` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Icon` | `ContentPresenter#ControlIcon.Content` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `ContentTemplate` | `ContentPresenter#ControlIcon.ContentTemplate` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `FontSize` | `ContentPresenter#ControlIcon.TextElement.FontSize` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Foreground` | `ContentPresenter#ControlIcon.TextElement.Foreground` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Content` | `ContentPresenter#ContentPresenter.Content` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `ContentTemplate` | `ContentPresenter#ContentPresenter.ContentTemplate` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Foreground` | `ContentPresenter#ContentPresenter.TextElement.Foreground` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Foreground` | `ToggleButton.Foreground` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `IsDropDownOpen` | `ToggleButton.IsChecked` | TemplateBinding | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `ColumnDefinition.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `Border.Margin` | `0` | 직접 지정 / 현재 템플릿 | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `ColumnDefinition.Width` | `*` | 직접 지정 / 현재 템플릿 | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `SymbolIcon.FontSize` | `10` | 직접 지정 / 현재 템플릿 | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `ControlIcon.Margin` | `0` | Content={x:Null} | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `ControlIcon.Margin` | `0` | Content= | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+| `ControlIcon.Margin` | `0` | Icon={x:Null} | [SplitButton.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/SplitButton/SplitButton.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

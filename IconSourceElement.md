@@ -1,6 +1,6 @@
 # IconSourceElement
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 IconSource를 실제 아이콘으로 변환하기 위한 어댑터입니다. 4.3.0에서는 단독 렌더링이 아닌 아이콘 속성의 강제 변환 경로로 사용합니다.
 
@@ -53,6 +53,15 @@ Demo.Icon = source.CreateIconElement();
 | 시그니처 | 용도 |
 | --- | --- |
 | `IconElement? CreateIconElement()` | 아이콘 속성 데이터로부터 새 시각 아이콘을 만듭니다. |
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+일반 UI 컨테이너처럼 템플릿을 교체하는 타입이 아닙니다. Button.Icon 등의 Coerce 경로에서 IconSource.CreateIconElement()로 실제 아이콘을 만듭니다. Resources의 Style 키를 선택하는 방식보다 IconSource의 속성과 생성된 아이콘을 조정합니다.
+
+<!-- customization:end -->
 
 ## 동작과 주의 사항
 

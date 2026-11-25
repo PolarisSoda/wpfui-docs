@@ -3,4 +3,5 @@ obj/
 .vs/
 __pycache__/
 .checks/
+.customization-checks/
 .DS_Store

@@ -1,6 +1,6 @@
 # CardColor
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 색상과 이름·설명을 함께 보여 주는 색상 표본 카드입니다.
 
@@ -37,6 +37,89 @@ Demo.Subtitle = "Coral";
 | `CardBrush` | `Brush` | 외부 읽기 전용 | `Brushes.Transparent` | 실제로 색상 표본에 표시하는 브러시입니다. `Color` 또는 `Brush` 변경으로 갱신되며 외부 쓰기는 허용되지 않습니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+화면의 데이터 내용은 공개 속성·ContentTemplate·ItemTemplate로, 여러 속성의 공통 설정은 Style로 바꿉니다. 아래에서 DynamicResource로 연결된 키는 해당 요소의 Resources 재정의 후보이고, StaticResource·고정 템플릿 값은 별도 수정 경로입니다. 상태별 트리거가 있으면 그 상태에서 쓰이는 값을 조정해야 합니다.
+
+### 이 컨트롤의 Resources에서 바꾸기
+
+`CardBackground`는 `SolidColorBrush` 타입의 DynamicResource 참조입니다. 아래는 해당 키가 참조되는 기본 템플릿·상태에 적용하는 예제입니다. 기존 로컬 속성값·사용자 Style이 이 경로를 대체했다면 해당 설정도 확인합니다.
+
+<!-- customization:example CardColor_Resources -->
+```xml
+<ui:CardColor Title="브랜드" Subtitle="#3366CC" Color="#3366CC" Width="200" Height="120"  x:Name="ResourceDemo">
+    <ui:CardColor.Resources>
+        <SolidColorBrush x:Key="CardBackground" Color="#2563EB" />
+    </ui:CardColor.Resources>
+</ui:CardColor>
+```
+
+```csharp
+ResourceDemo.Resources["CardBackground"] = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(37, 99, 235));
+```
+
+<!-- customization:example-end -->
+
+C# 조각은 위 XAML과 같은 창·뷰에서 실행합니다. Resources에 넣는 값의 **타입**을 유지해야 합니다. 자식 컨트롤도 같은 키를 조회하면 영향을 받을 수 있습니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `CardBackground` | SolidColorBrush | 컨트롤.Background |
+| `CardBorderBrush` | SolidColorBrush | 컨트롤.BorderBrush |
+| `CardForeground` | SolidColorBrush | 컨트롤.Foreground |
+| `CardForegroundPressed` | SolidColorBrush | TextBlock Foreground |
+| `DefaultControlFocusVisualStyle` | Style | 컨트롤.FocusVisualStyle |
+
+### 템플릿을 바꿀 때 유지할 연결
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `Background` | `Border#CardBorder.Background` | TemplateBinding | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `BorderBrush` | `Border#CardBorder.BorderBrush` | TemplateBinding | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `CardBrush` | `Border.Background` | TemplateBinding | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `BorderBrush` | `Border.BorderBrush` | TemplateBinding | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `Title` | `TextBlock.Text` | TemplateBinding | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `SubtitleFontSize` | `TextBlock.FontSize` | TemplateBinding | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `Subtitle` | `TextBlock.Text` | TemplateBinding | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `Border#CardBorder.Padding` | `8` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `Border#CardBorder.BorderThickness` | `1` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `Border#CardBorder.CornerRadius` | `4` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `Border.BorderThickness` | `1` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `Border.CornerRadius` | `4` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `TextBlock.Margin` | `0,8,0,0` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `TextBlock.FontSize` | `16` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+| `TextBlock.Margin` | `0` | 직접 지정 / 현재 템플릿 | [CardColor.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CardColor/CardColor.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

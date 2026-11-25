@@ -1,6 +1,6 @@
 # Menu
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 상단 메뉴 항목을 가로로 배치합니다.
 
@@ -38,6 +38,64 @@ Demo.Items.Add(new ui.MenuItem { Header = "도움말" });
 | `DisplayMemberPath` | `string` | 객체 중 문자열로 표시할 멤버 이름입니다. ItemTemplate와 용도를 구분합니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+화면의 데이터 내용은 공개 속성·ContentTemplate·ItemTemplate로, 여러 속성의 공통 설정은 Style로 바꿉니다. 아래에서 DynamicResource로 연결된 키는 해당 요소의 Resources 재정의 후보이고, StaticResource·고정 템플릿 값은 별도 수정 경로입니다. 상태별 트리거가 있으면 그 상태에서 쓰이는 값을 조정해야 합니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `MenuBarBackground` | SolidColorBrush | 컨트롤.Background |
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `DefaultMenuStyle` | Style | Style BasedOn |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 선택·확장할 수 있는 스타일 키
+
+| 키 | 대상 | 정의 |
+| --- | --- | --- |
+| `DefaultMenuStyle` | `Menu` | [Menu.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Menu/Menu.xaml) |
+| `{x:Type Menu}` | `Menu` | [Menu.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Menu/Menu.xaml) |
+
+`Style="{StaticResource 키}"`로 선택하거나 새 Style의 BasedOn에 연결합니다. TargetType이 맞아야 하며 정의 파일이 실제 리소스 범위에 로드되어 있어야 합니다. 접두사 Default가 붙은 키도 앱에서 선택할 수 있지만 내부 구현 변경에 영향을 받을 수 있습니다.
+
+`{x:Static ...}`·`{x:Type ...}` 형태는 문자열 키가 아닌 객체 키입니다. 예를 들어 ToolBar.ButtonStyleKey를 읽을 때는 `Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"`처럼 중첩 마크업을 사용합니다. 일반 문자열처럼 같은 이름을 추가하는 방식과 다릅니다. [복합 키 사용 예](CustomizationGuide.md)를 확인합니다.
+
+### 템플릿을 바꿀 때 유지할 연결
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [Menu.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Menu/Menu.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `Background` | `Border.Background` | TemplateBinding | [Menu.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Menu/Menu.xaml) |
+| `BorderBrush` | `Border.BorderBrush` | TemplateBinding | [Menu.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Menu/Menu.xaml) |
+| `BorderThickness` | `Border.BorderThickness` | TemplateBinding | [Menu.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Menu/Menu.xaml) |
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

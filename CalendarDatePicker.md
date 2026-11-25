@@ -1,6 +1,6 @@
 # CalendarDatePicker
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 버튼을 누르면 달력을 열어 날짜를 고르는 컨트롤입니다.
 
@@ -59,6 +59,36 @@ Demo.FirstDayOfWeek = System.DayOfWeek.Sunday;
 | `ClickMode` | `ClickMode` | Release·Press·Hover 중 클릭을 발생시킬 시점을 정합니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+화면의 데이터 내용은 공개 속성·ContentTemplate·ItemTemplate로, 여러 속성의 공통 설정은 Style로 바꿉니다. 아래에서 DynamicResource로 연결된 키는 해당 요소의 Resources 재정의 후보이고, StaticResource·고정 템플릿 값은 별도 수정 경로입니다. 상태별 트리거가 있으면 그 상태에서 쓰이는 값을 조정해야 합니다.
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `CalendarPickerIcon` | SymbolIcon | 컨트롤.Icon |
+| `DefaultUiButtonStyle` | Style | Style BasedOn |
+| `DefaultUiCalendarDatePickerStyle` | Style | Style BasedOn |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 선택·확장할 수 있는 스타일 키
+
+| 키 | 대상 | 정의 |
+| --- | --- | --- |
+| `DefaultUiCalendarDatePickerStyle` | `controls:CalendarDatePicker` | [CalendarDatePicker.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/CalendarDatePicker/CalendarDatePicker.xaml) |
+
+`Style="{StaticResource 키}"`로 선택하거나 새 Style의 BasedOn에 연결합니다. TargetType이 맞아야 하며 정의 파일이 실제 리소스 범위에 로드되어 있어야 합니다. 접두사 Default가 붙은 키도 앱에서 선택할 수 있지만 내부 구현 변경에 영향을 받을 수 있습니다.
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

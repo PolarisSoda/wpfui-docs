@@ -1,0 +1,49 @@
+<Window x:Class="CustomizationLab.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Resources·Style·Template 조정 예제" Width="900" Height="760">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24">
+            <ui:TextBlock Text="Card 반지름: 세 가지 경우" FontTypography="Title" Margin="0,0,0,16" />
+            <ui:Card Margin="0,0,0,12" Content="Footer 없음: ControlCornerRadius=12">
+                <ui:Card.Resources><CornerRadius x:Key="ControlCornerRadius">12</CornerRadius></ui:Card.Resources>
+            </ui:Card>
+            <ui:Card Margin="0,0,0,12" Content="기본 Footer: 리소스가 12여도 템플릿은 4로 고정">
+                <ui:Card.Resources><CornerRadius x:Key="ControlCornerRadius">12</CornerRadius></ui:Card.Resources>
+                <ui:Card.Footer><TextBlock Text="원본 Footer 모서리 4" /></ui:Card.Footer>
+            </ui:Card>
+            <ui:Card Margin="0,0,0,20" Content="수정한 템플릿: Footer까지 12" Style="{StaticResource RoundedFooterCardStyle}">
+                <ui:Card.Footer><TextBlock Text="위·아래 모서리 분할까지 수정" /></ui:Card.Footer>
+            </ui:Card>
+            <ui:TextBlock Text="상태별 색·입력 여백" FontTypography="Subtitle" Margin="0,0,0,12" />
+            <ui:Button Content="마우스를 올리거나 눌러 보세요" Appearance="Primary" HorizontalAlignment="Left" Margin="0,0,0,12">
+                <ui:Button.Resources>
+                    <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+                    <SolidColorBrush x:Key="AccentButtonBackground" Color="#2563EB" />
+                    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="#1D4ED8" />
+                    <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="#1E40AF" />
+                </ui:Button.Resources>
+            </ui:Button>
+            <ui:TextBox Width="320" HorizontalAlignment="Left" PlaceholderText="포커스 시 배경색 변경" Margin="0,0,0,20">
+                <ui:TextBox.Resources>
+                    <CornerRadius x:Key="ControlCornerRadius">10</CornerRadius>
+                    <Thickness x:Key="TextControlThemePadding">16,10</Thickness>
+                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#EFF6FF" />
+                </ui:TextBox.Resources>
+            </ui:TextBox>
+            <ui:TextBlock Text="배지는 선택한 스타일에 따라 다릅니다" FontTypography="Subtitle" Margin="0,0,0,12" />
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <ui:InfoBadge Value="3" Style="{StaticResource ValueInfoBadgeStyle}" />
+                <ui:InfoBadge Margin="12,0" Style="{StaticResource DotInfoBadgeStyle}" Severity="Success" />
+                <ui:InfoBadge Style="{StaticResource IconInfoBadgeStyle}" CornerRadius="12" Icon="{ui:SymbolIcon Checkmark24}" />
+            </StackPanel>
+            <ui:ProgressRing Progress="65" Width="48" Height="48" HorizontalAlignment="Left">
+                <ui:ProgressRing.Resources>
+                    <SolidColorBrush x:Key="ProgressRingForegroundThemeBrush" Color="#2563EB" />
+                    <SolidColorBrush x:Key="ProgressRingBackgroundThemeBrush" Color="#DBEAFE" />
+                </ui:ProgressRing.Resources>
+            </ui:ProgressRing>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

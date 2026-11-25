@@ -1,6 +1,6 @@
 # SymbolIcon
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 WPF UI에 포함된 Fluent System Icons 글꼴의 아이콘을 표시합니다.
 
@@ -45,6 +45,23 @@ Demo.Foreground = System.Windows.Media.Brushes.CornflowerBlue;
 | `Foreground` | [IconElement](IconElement.md) | 아이콘에 적용할 전경 브러시입니다. 글꼴 기반 아이콘에 색을 주며, 비트맵 자체의 픽셀색을 다시 칠하는 속성은 아닙니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+개별 크기·아이콘·채움 여부는 FontSize·Symbol·Filled를 직접 설정합니다. MenuItem.xaml 내부에 SymbolIcon용 스타일이 있어도 모든 SymbolIcon에 전역 적용되는 공개 스타일 키라고 해석하지 않습니다. 생성자의 DefaultIconFontSize 조회는 FontIcon 문서의 앱 범위 조건을 따릅니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `TextFillColorSecondaryBrush` | SolidColorBrush | 컨트롤.Foreground〔{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type controls:Button}}}=True〕 |
+
+<!-- customization:end -->
 
 ## 동작과 주의 사항
 

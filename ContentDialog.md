@@ -1,6 +1,6 @@
 # ContentDialog
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 현재 창 위에 겹쳐 표시하는 비동기 대화상자입니다. 별도 최상위 Window를 만들지 않습니다.
 
@@ -82,6 +82,126 @@ if (result == ui.ContentDialogResult.Primary)
 - `ContentDialogButton`: `Primary`, `Secondary`, `Close`.
 
 열거형 이름이 비슷해도 다른 타입일 수 있습니다. [열거형 안내](Enums.md)에서 의미를 비교할 수 있습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+대화상자는 PopupCornerRadius, 하단 영역은 DynamicResource DialogFooterCornerRadius, 상단 오버레이는 StaticResource DialogOverlayCornerRadius를 사용합니다. 따라서 PopupCornerRadius 하나를 바꿨다고 모든 내부 레이어가 같은 반지름으로 바뀌지는 않습니다. SmokeFill·본문 배경·하단 배경도 서로 다른 키입니다. 전용 ContentDialogHost 경로에서는 호스트가 배경 격리를 관리하므로 ContentDialogHost 문서도 확인합니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `PopupCornerRadius` | CornerRadius | 컨트롤.Border.CornerRadius |
+| `ContentDialogBackground` | SolidColorBrush | 컨트롤.Background |
+| `ContentDialogBorderBrush` | SolidColorBrush | 컨트롤.BorderBrush |
+| `ContentDialogForeground` | SolidColorBrush | 컨트롤.Foreground |
+| `ContentDialogSeparatorBorderBrush` | SolidColorBrush | Border BorderBrush |
+| `ContentDialogSmokeFill` | SolidColorBrush | DialogRootGrid.Background〔IsLegacyHost=True〕 |
+| `ContentDialogTopOverlay` | SolidColorBrush | Border Background |
+| `ControlContentThemeFontSize` | Double | 컨트롤.FontSize |
+| `DialogFooterCornerRadius` | CornerRadius | Border CornerRadius |
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `BoolToVisibilityConverter` | BoolToVisibilityConverter | Border Visibility / Button#PrimaryButton Visibility / Button#SecondaryButton Visibility |
+| `DialogOverlayCornerRadius` | CornerRadius | Border CornerRadius |
+| `EnumToBoolConverter` | ContentDialogButtonEnumToBoolConverter | Button#PrimaryButton IsDefault / Button#SecondaryButton IsDefault / Button#CloseButton IsDefault |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 템플릿을 바꿀 때 유지할 연결
+
+원본 템플릿에 정의된 PART: `PART_ContentScroll` (PassiveScrollViewer). WPF 기반 클래스가 사용하는 연결도 보존합니다.
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `DialogWidth` | `Border.MaxWidth` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `DialogHeight` | `Border.MaxHeight` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `DialogMargin` | `Border.Margin` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `Background` | `Border.Background` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `BorderBrush` | `Border.BorderBrush` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `BorderThickness` | `Border.BorderThickness` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `Border.CornerRadius` | `Border.CornerRadius` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `Title` | `ContentPresenter.Content` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `TitleTemplate` | `ContentPresenter.ContentTemplate` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ScrollViewer.CanContentScroll` | `PassiveScrollViewer#PART_ContentScroll.CanContentScroll` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ScrollViewer.HorizontalScrollBarVisibility` | `PassiveScrollViewer#PART_ContentScroll.HorizontalScrollBarVisibility` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ScrollViewer.IsDeferredScrollingEnabled` | `PassiveScrollViewer#PART_ContentScroll.IsDeferredScrollingEnabled` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ScrollViewer.VerticalScrollBarVisibility` | `PassiveScrollViewer#PART_ContentScroll.VerticalScrollBarVisibility` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `HorizontalContentAlignment` | `ContentPresenter.HorizontalAlignment` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `VerticalContentAlignment` | `ContentPresenter.VerticalAlignment` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `Content` | `ContentPresenter.Content` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ContentTemplate` | `ContentPresenter.ContentTemplate` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ContentTemplateSelector` | `ContentPresenter.ContentTemplateSelector` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `Padding` | `Border.Padding` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `IsFooterVisible` | `Border.Visibility` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `PrimaryButtonAppearance` | `Button#PrimaryButton.Appearance` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `PrimaryButtonText` | `Button#PrimaryButton.Content` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `PrimaryButtonIcon` | `Button#PrimaryButton.Icon` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `DefaultButton` | `Button#PrimaryButton.IsDefault` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `IsPrimaryButtonEnabled` | `Button#PrimaryButton.IsEnabled` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `IsPrimaryButtonEnabled` | `Button#PrimaryButton.Visibility` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `SecondaryButtonAppearance` | `Button#SecondaryButton.Appearance` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `SecondaryButtonText` | `Button#SecondaryButton.Content` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `SecondaryButtonIcon` | `Button#SecondaryButton.Icon` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `DefaultButton` | `Button#SecondaryButton.IsDefault` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `IsSecondaryButtonEnabled` | `Button#SecondaryButton.IsEnabled` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `IsSecondaryButtonEnabled` | `Button#SecondaryButton.Visibility` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `CloseButtonAppearance` | `Button#CloseButton.Appearance` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `CloseButtonText` | `Button#CloseButton.Content` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `CloseButtonIcon` | `Button#CloseButton.Icon` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `DefaultButton` | `Button#CloseButton.IsDefault` | TemplateBinding | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `컨트롤.Padding` | `24` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `컨트롤.BorderThickness` | `1` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `RowDefinition.Height` | `*` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `RowDefinition.Height` | `Auto` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `Grid.Margin` | `24,10` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ContentPresenter.Margin` | `0,12,0,0` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `PassiveScrollViewer#PART_ContentScroll.Margin` | `0,20` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `PassiveScrollViewer#PART_ContentScroll.Padding` | `0,0,12,0` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `Border.BorderThickness` | `0,1,0,0` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ColumnDefinition#PrimaryColumn.Width` | `*` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ColumnDefinition#FirstSpacer.Width` | `8` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ColumnDefinition#SecondaryColumn.Width` | `*` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ColumnDefinition#SecondSpacer.Width` | `8` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `ColumnDefinition#CloseColumn.Width` | `*` | 직접 지정 / 현재 템플릿 | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `PrimaryColumn.Width` | `0` | IsPrimaryButtonEnabled=False | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `FirstSpacer.Width` | `0` | IsSecondaryButtonEnabled=False | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `SecondaryColumn.Width` | `0` | IsSecondaryButtonEnabled=False | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+| `SecondSpacer.Width` | `0` | IsPrimaryButtonEnabled=False; IsSecondaryButtonEnabled=False | [ContentDialog.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/ContentDialog/ContentDialog.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

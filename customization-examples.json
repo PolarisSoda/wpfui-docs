@@ -1,0 +1,472 @@
+[
+  {
+    "id": "AutoSuggestBox_Resources",
+    "page": "AutoSuggestBox",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "Badge_Resources",
+    "page": "Badge",
+    "kind": "resource",
+    "key": "BadgeBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "BreadcrumbBarItem_Resources",
+    "page": "BreadcrumbBarItem",
+    "kind": "resource",
+    "key": "BreadcrumbBarCurrentNormalForegroundBrush",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "Button_Resources",
+    "page": "Button",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "Button_Recipe1",
+    "page": "Button",
+    "kind": "recipe"
+  },
+  {
+    "id": "Calendar_Resources",
+    "page": "Calendar",
+    "kind": "resource",
+    "key": "CalendarViewBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "Card_Resources",
+    "page": "Card",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "CardAction_Resources",
+    "page": "CardAction",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "CardColor_Resources",
+    "page": "CardColor",
+    "kind": "resource",
+    "key": "CardBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "CardControl_Resources",
+    "page": "CardControl",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "CardExpander_Resources",
+    "page": "CardExpander",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "CheckBox_Resources",
+    "page": "CheckBox",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "ComboBox_Resources",
+    "page": "ComboBox",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "ContentDialogHost_Resources",
+    "page": "ContentDialogHost",
+    "kind": "resource",
+    "key": "ContentDialogSmokeFill",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "ContextMenu_Resources",
+    "page": "ContextMenu",
+    "kind": "resource",
+    "key": "ContextMenuBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "DataGrid_Resources",
+    "page": "DataGrid",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "DatePicker_Resources",
+    "page": "DatePicker",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "DropDownButton_Resources",
+    "page": "DropDownButton",
+    "kind": "resource",
+    "key": "ControlStrokeColorDefaultBrush",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "DynamicScrollBar_Resources",
+    "page": "DynamicScrollBar",
+    "kind": "resource",
+    "key": "ScrollBarButtonBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "Expander_Resources",
+    "page": "Expander",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "FluentWindow_Resources",
+    "page": "FluentWindow",
+    "kind": "resource",
+    "key": "ControlContentThemeFontSize",
+    "type": "Double"
+  },
+  {
+    "id": "Flyout_Resources",
+    "page": "Flyout",
+    "kind": "resource",
+    "key": "PopupCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "HyperlinkButton_Resources",
+    "page": "HyperlinkButton",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "InfoBadge_Resources",
+    "page": "InfoBadge",
+    "kind": "resource",
+    "key": "ButtonForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "InfoBadge_Recipe1",
+    "page": "InfoBadge",
+    "kind": "recipe"
+  },
+  {
+    "id": "InfoBar_Resources",
+    "page": "InfoBar",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "Label_Resources",
+    "page": "Label",
+    "kind": "resource",
+    "key": "LabelForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "ListBoxItem_Resources",
+    "page": "ListBoxItem",
+    "kind": "resource",
+    "key": "ListBoxItemForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "ListView_Resources",
+    "page": "ListView",
+    "kind": "resource",
+    "key": "ControlFillColorDefault",
+    "type": "Color"
+  },
+  {
+    "id": "ListView_Recipe1",
+    "page": "ListView",
+    "kind": "recipe"
+  },
+  {
+    "id": "ListViewItem_Resources",
+    "page": "ListViewItem",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "LoadingScreen_Resources",
+    "page": "LoadingScreen",
+    "kind": "resource",
+    "key": "LoadingScreenBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "MenuItem_Resources",
+    "page": "MenuItem",
+    "kind": "resource",
+    "key": "CheckBoxBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "MessageBox_Resources",
+    "page": "MessageBox",
+    "kind": "resource",
+    "key": "MessageBoxBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "NavigationView_Resources",
+    "page": "NavigationView",
+    "kind": "resource",
+    "key": "NavigationViewContentBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "NavigationViewItem_Resources",
+    "page": "NavigationViewItem",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "NavigationViewItemHeader_Resources",
+    "page": "NavigationViewItemHeader",
+    "kind": "resource",
+    "key": "NavigationViewItemForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "NavigationViewItemSeparator_Resources",
+    "page": "NavigationViewItemSeparator",
+    "kind": "resource",
+    "key": "NavigationViewItemSeparatorForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "NumberBox_Resources",
+    "page": "NumberBox",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "Page_Resources",
+    "page": "Page",
+    "kind": "resource",
+    "key": "TextFillColorPrimary",
+    "type": "Color"
+  },
+  {
+    "id": "PasswordBox_Resources",
+    "page": "PasswordBox",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "ProgressBar_Resources",
+    "page": "ProgressBar",
+    "kind": "resource",
+    "key": "ProgressBarBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "ProgressRing_Resources",
+    "page": "ProgressRing",
+    "kind": "resource",
+    "key": "ProgressRingBackgroundThemeBrush",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "ProgressRing_Recipe1",
+    "page": "ProgressRing",
+    "kind": "recipe"
+  },
+  {
+    "id": "RadioButton_Resources",
+    "page": "RadioButton",
+    "kind": "resource",
+    "key": "ControlContentThemeFontSize",
+    "type": "Double"
+  },
+  {
+    "id": "RatingControl_Resources",
+    "page": "RatingControl",
+    "kind": "resource",
+    "key": "TextFillColorPrimaryBrush",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "ScrollBar_Resources",
+    "page": "ScrollBar",
+    "kind": "resource",
+    "key": "ScrollBarButtonBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "Separator_Resources",
+    "page": "Separator",
+    "kind": "resource",
+    "key": "SeparatorBorderBrush",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "Slider_Resources",
+    "page": "Slider",
+    "kind": "resource",
+    "key": "SliderTickBarFill",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "Snackbar_Resources",
+    "page": "Snackbar",
+    "kind": "csharp"
+  },
+  {
+    "id": "SplitButton_Resources",
+    "page": "SplitButton",
+    "kind": "resource",
+    "key": "ButtonBackgroundDisabled",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "StatusBar_Resources",
+    "page": "StatusBar",
+    "kind": "resource",
+    "key": "ControlFillColorDefault",
+    "type": "Color"
+  },
+  {
+    "id": "TabControl_Resources",
+    "page": "TabControl",
+    "kind": "resource",
+    "key": "TabViewBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "TabItem_Resources",
+    "page": "TabItem",
+    "kind": "resource",
+    "key": "TabViewItemHeaderBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "TabView_Recipe1",
+    "page": "TabView",
+    "kind": "recipe"
+  },
+  {
+    "id": "TabViewItem_Recipe1",
+    "page": "TabViewItem",
+    "kind": "recipe"
+  },
+  {
+    "id": "TextBox_Resources",
+    "page": "TextBox",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "TextBox_Recipe1",
+    "page": "TextBox",
+    "kind": "recipe"
+  },
+  {
+    "id": "ThumbRate_Resources",
+    "page": "ThumbRate",
+    "kind": "resource",
+    "key": "ThumbRateForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "TimePicker_Resources",
+    "page": "TimePicker",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "TitleBar_Resources",
+    "page": "TitleBar",
+    "kind": "resource",
+    "key": "ButtonForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "ToggleButton_Resources",
+    "page": "ToggleButton",
+    "kind": "resource",
+    "key": "ControlCornerRadius",
+    "type": "CornerRadius"
+  },
+  {
+    "id": "ToggleSwitch_Resources",
+    "page": "ToggleSwitch",
+    "kind": "resource",
+    "key": "ControlContentThemeFontSize",
+    "type": "Double"
+  },
+  {
+    "id": "ToggleSwitch_Recipe1",
+    "page": "ToggleSwitch",
+    "kind": "recipe"
+  },
+  {
+    "id": "ToolBar_Recipe1",
+    "page": "ToolBar",
+    "kind": "recipe"
+  },
+  {
+    "id": "ToolTip_Resources",
+    "page": "ToolTip",
+    "kind": "resource",
+    "key": "ToolTipBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "TreeView_Resources",
+    "page": "TreeView",
+    "kind": "resource",
+    "key": "TreeViewItemForeground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "TreeViewItem_Resources",
+    "page": "TreeViewItem",
+    "kind": "resource",
+    "key": "TreeViewItemBackground",
+    "type": "SolidColorBrush"
+  },
+  {
+    "id": "VirtualizingGridView_Resources",
+    "page": "VirtualizingGridView",
+    "kind": "resource",
+    "key": "ControlFillColorDefault",
+    "type": "Color"
+  },
+  {
+    "id": "Window_Resources",
+    "page": "Window",
+    "kind": "resource",
+    "key": "ControlContentThemeFontSize",
+    "type": "Double"
+  }
+]

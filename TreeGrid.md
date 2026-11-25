@@ -1,6 +1,6 @@
 # TreeGrid
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 트리형 데이터 표를 위한 미완성 공개 타입입니다.
 
@@ -45,6 +45,54 @@ var headers = Demo.Headers;
 | `DisplayMemberPath` | `string` | 객체 중 문자열로 표시할 멤버 이름입니다. ItemTemplate와 용도를 구분합니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+미완성 타입입니다. Resources·Style을 바꾸어도 Headers.CollectionChanged의 NotImplementedException이 해결되지는 않습니다. 실사용 기능을 제공하는 조정 예제로 권하지 않습니다.
+
+### 템플릿을 바꿀 때 유지할 연결
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `VirtualizingPanel.IsVirtualizing` | `VirtualizingStackPanel.IsVirtualizing` | TemplateBinding | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `VirtualizingPanel.VirtualizationMode` | `VirtualizingStackPanel.VirtualizationMode` | TemplateBinding | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `ScrollViewer.CanContentScroll` | `PassiveScrollViewer.CanContentScroll` | TemplateBinding | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `ScrollViewer.HorizontalScrollBarVisibility` | `PassiveScrollViewer.HorizontalScrollBarVisibility` | TemplateBinding | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `ScrollViewer.VerticalScrollBarVisibility` | `PassiveScrollViewer.VerticalScrollBarVisibility` | TemplateBinding | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `UIElement.SnapsToDevicePixels` | `ItemsPresenter.SnapsToDevicePixels` | TemplateBinding | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `컨트롤.Margin` | `0` | 직접 지정 / 현재 템플릿 | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `컨트롤.Padding` | `0` | 직접 지정 / 현재 템플릿 | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `RowDefinition.Height` | `Auto` | 직접 지정 / 현재 템플릿 | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `RowDefinition.Height` | `*` | 직접 지정 / 현재 템플릿 | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `Border.Margin` | `0` | 직접 지정 / 현재 템플릿 | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `Border.BorderThickness` | `1` | 직접 지정 / 현재 템플릿 | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+| `TreeViewItem.Padding` | `0` | 직접 지정 / 현재 템플릿 | [TreeGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TreeGrid/TreeGrid.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

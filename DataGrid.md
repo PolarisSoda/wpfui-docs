@@ -1,6 +1,6 @@
 # DataGrid
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 기본 WPF 표에 자동·추가 열의 표시·편집 스타일 연결을 더한 컨트롤입니다.
 
@@ -56,6 +56,109 @@ Demo.IsReadOnly = false;
 | `CanUserAddRows` | `bool` | 새 행 입력 UI를 허용할지 정합니다. 데이터 원본의 추가 지원도 필요합니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+표 전체 배경·테두리는 DataGrid에, 행·셀은 RowStyle·CellStyle에, 열 헤더는 ColumnHeaderStyle에 설정합니다. CheckBoxColumnElementStyle 등 고유 속성은 열 내부의 표시·편집 컨트롤 스타일입니다. 테마 키를 재정의할 때 Color와 Brush 타입을 혼동하지 말고, 상태별 선택·포인터 색까지 함께 확인합니다.
+
+### 이 컨트롤의 Resources에서 바꾸기
+
+`ControlCornerRadius`는 `CornerRadius` 타입의 DynamicResource 참조입니다. 아래는 해당 키가 참조되는 기본 템플릿·상태에 적용하는 예제입니다. 기존 로컬 속성값·사용자 Style이 이 경로를 대체했다면 해당 설정도 확인합니다.
+
+<!-- customization:example DataGrid_Resources -->
+```xml
+<ui:DataGrid AutoGenerateColumns="False" IsReadOnly="True" x:Name="ResourceDemo">
+    <ui:DataGrid.Resources>
+        <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+    </ui:DataGrid.Resources>
+    <DataGrid.Columns><DataGridTextColumn Header="이름" Binding="{Binding Name}" /></DataGrid.Columns>
+</ui:DataGrid>
+```
+
+```csharp
+ResourceDemo.Resources["ControlCornerRadius"] = new System.Windows.CornerRadius(12);
+```
+
+<!-- customization:example-end -->
+
+C# 조각은 위 XAML과 같은 창·뷰에서 실행합니다. Resources에 넣는 값의 **타입**을 유지해야 합니다. 자식 컨트롤도 같은 키를 조회하면 영향을 받을 수 있습니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `ControlCornerRadius` | CornerRadius | Border#DGR_Border CornerRadius / Border#HeaderBorder CornerRadius / Border CornerRadius / 컨트롤.Border.CornerRadius |
+| `ControlContentThemeFontSize` | Double | 컨트롤.FontSize |
+| `ControlElevationBorderBrush` | LinearGradientBrush / SolidColorBrush | 컨트롤.BorderBrush / 컨트롤.HorizontalGridLinesBrush / 컨트롤.VerticalGridLinesBrush |
+| `DefaultControlContextMenu` | ContextMenu | 컨트롤.ContextMenu |
+| `DefaultControlFocusVisualStyle` | Style | 컨트롤.FocusVisualStyle |
+| `ListViewItemBackgroundPointerOver` | SolidColorBrush | DGR_Border.Background〔IsEnabled=True; IsMouseOver=True〕 / DGR_Border.Background〔IsSelected=True〕 / HeaderBorder.Background〔IsMouseOver=True〕 |
+| `ListViewItemForeground` | SolidColorBrush | 컨트롤.Foreground |
+| `ListViewItemPillFillBrush` | SolidColorBrush | Rectangle#ActiveRectangle Fill |
+| `SubtleFillColorDisabledBrush` | SolidColorBrush | DiscreteObjectKeyFrame Value |
+| `SubtleFillColorSecondaryBrush` | SolidColorBrush | DiscreteObjectKeyFrame Value |
+| `SubtleFillColorTertiaryBrush` | SolidColorBrush | DiscreteObjectKeyFrame Value / HeaderBorder.Background〔IsPressed=True〕 / 컨트롤.Background |
+| `SubtleFillColorTransparentBrush` | SolidColorBrush | DiscreteObjectKeyFrame Value |
+| `SystemFillColorCriticalBrush` | SolidColorBrush | SymbolIcon Foreground |
+| `TextControlForeground` | SolidColorBrush | 컨트롤.Foreground |
+| `TextControlThemeMinHeight` | Double | 컨트롤.MinHeight |
+| `TextControlThemeMinWidth` | Double | 컨트롤.MinWidth |
+| `TextFillColorDisabledBrush` | SolidColorBrush | DiscreteObjectKeyFrame Value / 컨트롤.TextElement.Foreground〔IsEnabled=False〕 |
+| `TextFillColorSecondaryBrush` | SolidColorBrush | DiscreteObjectKeyFrame Value |
+| `TextFillColorTertiaryBrush` | SolidColorBrush | DiscreteObjectKeyFrame Value |
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `BodyTextBlockStyle` | Style | Style BasedOn |
+| `BooleanToVisibilityConverter` | BooleanToVisibilityConverter | Control Visibility |
+| `ColumnHeaderGripperStyle` | Style | Thumb#PART_LeftHeaderGripper Style / Thumb#PART_RightHeaderGripper Style |
+| `ComboBoxChevronMargin` | Thickness | SymbolIcon Margin |
+| `ComboBoxChevronSize` | Double | SymbolIcon FontSize |
+| `DefaultCheckBoxStyle` | Style | Style BasedOn |
+| `DefaultComboBoxStyle` | Style | Style BasedOn |
+| `DefaultDataGridCellStyle` | Style | 컨트롤.CellStyle / Style BasedOn |
+| `DefaultDataGridCheckBoxEditingElementStyle` | Style | 컨트롤.CheckBoxColumnEditingElementStyle |
+| `DefaultDataGridCheckBoxElementStyle` | Style | 컨트롤.CheckBoxColumnElementStyle |
+| `DefaultDataGridColumnHeaderStyle` | Style | 컨트롤.ColumnHeaderStyle / Style BasedOn |
+| `DefaultDataGridColumnHeadersPresenterStyle` | Style | Style BasedOn |
+| `DefaultDataGridComboBoxEditingElementStyle` | Style | 컨트롤.ComboBoxColumnEditingElementStyle |
+| `DefaultDataGridComboBoxElementStyle` | Style | 컨트롤.ComboBoxColumnElementStyle |
+| `DefaultDataGridFontSize` | Double | 컨트롤.FontSize |
+| `DefaultDataGridRowHeaderStyle` | Style | 컨트롤.RowHeaderStyle |
+| `DefaultDataGridRowStyle` | Style | 컨트롤.RowStyle |
+| `DefaultDataGridStyle` | Style | Style BasedOn |
+| `DefaultDataGridTextEditingElementStyle` | Style | 컨트롤.TextColumnEditingElementStyle |
+| `DefaultDataGridTextElementStyle` | Style | 컨트롤.TextColumnElementStyle |
+| `DefaultDragIndicatorStyleStyle` | Style | 컨트롤.DragIndicatorStyle |
+| `DefaultDropLocationIndicatorStyle` | Style | 컨트롤.DropLocationIndicatorStyle |
+| `DefaultTextBoxStyle` | Style | Style BasedOn |
+| `DefaultUiDataGridCellStyle` | Style | 컨트롤.CellStyle |
+| `DefaultUiDataGridColumnHeaderStyle` | Style | 컨트롤.ColumnHeaderStyle |
+| `DefaultUiDataGridStyle` | Style | Style BasedOn |
+| `GridViewHeaderRowIndicatorTemplate` | ControlTemplate | 컨트롤.Template |
+| `RowHeaderGripperStyle` | Style | Thumb#PART_TopHeaderGripper Style / Thumb#PART_BottomHeaderGripper Style |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 선택·확장할 수 있는 스타일 키
+
+| 키 | 대상 | 정의 |
+| --- | --- | --- |
+| `DefaultUiDataGridStyle` | `controls:DataGrid` | [DataGrid.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/DataGrid/DataGrid.xaml) |
+
+`Style="{StaticResource 키}"`로 선택하거나 새 Style의 BasedOn에 연결합니다. TargetType이 맞아야 하며 정의 파일이 실제 리소스 범위에 로드되어 있어야 합니다. 접두사 Default가 붙은 키도 앱에서 선택할 수 있지만 내부 구현 변경에 영향을 받을 수 있습니다.
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

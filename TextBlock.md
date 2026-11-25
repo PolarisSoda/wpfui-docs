@@ -1,6 +1,6 @@
 # TextBlock
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 Fluent 타이포그래피와 의미별 글자색을 지원하는 텍스트 표시 컨트롤입니다.
 
@@ -50,6 +50,15 @@ Demo.Appearance = ui.TextColor.Secondary;
 - `TextColor`: `Primary`, `Secondary`, `Tertiary`, `Disabled`.
 
 열거형 이름이 비슷해도 다른 타입일 수 있습니다. [열거형 안내](Enums.md)에서 의미를 비교할 수 있습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+문자 크기·굵기는 FontTypography 또는 FontSize·FontWeight로 설정합니다. FontTypography는 TextBlockMetadata의 크기·굵기 매핑을 사용하므로 `TitleTextBlockStyle`이라는 키를 Resources에서 바꾸는 것과 같은 경로가 아닙니다. Typography.xaml의 keyed Style을 직접 선택하는 방법도 있으며 FontTypography를 함께 설정했을 때 우선순위를 확인합니다.
+
+<!-- customization:end -->
 
 ## 동작과 주의 사항
 

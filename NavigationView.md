@@ -1,6 +1,6 @@
 # NavigationView
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 메뉴 패널, 페이지 표시 영역, 뒤로가기, 검색, 경로를 결합한 앱 탐색 컨테이너입니다.
 
@@ -78,6 +78,199 @@ if (Demo.CanGoBack) Demo.GoBack();
 - `NavigationViewPaneDisplayMode`: `Left`, `LeftMinimal`, `LeftFluent`, `Top`, `Bottom`.
 
 열거형 이름이 비슷해도 다른 타입일 수 있습니다. [열거형 안내](Enums.md)에서 의미를 비교할 수 있습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+배치·폭은 PaneDisplayMode·OpenPaneLength·CompactPaneLength로 먼저 설정합니다. 메뉴 항목 외형은 ItemTemplate(ControlTemplate), 본문 배경은 NavigationViewContentBackground 등 리소스로 따로 조정합니다. Left·Top·Bottom의 템플릿과 LeftMinimal·LeftFluent의 항목 템플릿이 다르므로 하나를 바꿔 모든 모드가 같아진다고 가정하지 않습니다. NavigationViewConstants의 고정 크기 StaticResource는 로컬 재정의 보장 대상이 아닙니다.
+
+### 이 컨트롤의 Resources에서 바꾸기
+
+`NavigationViewContentBackground`는 `SolidColorBrush` 타입의 DynamicResource 참조입니다. 아래는 해당 키가 참조되는 기본 템플릿·상태에 적용하는 예제입니다. 기존 로컬 속성값·사용자 Style이 이 경로를 대체했다면 해당 설정도 확인합니다.
+
+<!-- customization:example NavigationView_Resources -->
+```xml
+<ui:NavigationView PaneTitle="내 앱" PaneDisplayMode="Left" OpenPaneLength="240" IsBackButtonVisible="Auto" x:Name="ResourceDemo">
+    <ui:NavigationView.Resources>
+        <SolidColorBrush x:Key="NavigationViewContentBackground" Color="#2563EB" />
+    </ui:NavigationView.Resources>
+    <ui:NavigationView.MenuItems>
+        <ui:NavigationViewItem Content="홈" TargetPageTag="home" TargetPageType="{x:Type local:HomePage}" Icon="{ui:SymbolIcon Home24}" />
+    </ui:NavigationView.MenuItems>
+    <ui:NavigationView.FooterMenuItems>
+        <ui:NavigationViewItem Content="설정" TargetPageTag="settings" TargetPageType="{x:Type local:SettingsPage}" />
+    </ui:NavigationView.FooterMenuItems>
+</ui:NavigationView>
+```
+
+```csharp
+ResourceDemo.Resources["NavigationViewContentBackground"] = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(37, 99, 235));
+```
+
+<!-- customization:example-end -->
+
+C# 조각은 위 XAML과 같은 창·뷰에서 실행합니다. Resources에 넣는 값의 **타입**을 유지해야 합니다. 자식 컨트롤도 같은 키를 조회하면 영향을 받을 수 있습니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `LeftNavigationViewSeparatorBrush` | LinearGradientBrush | Border#PART_TopSeparator Background / Border#PART_FooterSeparator Background |
+| `NavigationViewContentBackground` | SolidColorBrush | Border Background |
+| `NavigationViewContentGridBorderBrush` | SolidColorBrush | Border BorderBrush |
+| `NavigationViewItemForeground` | SolidColorBrush | 컨트롤.Foreground |
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `BackButtonVisibilityToVisibilityConverter` | BackButtonVisibilityToVisibilityConverter | Button#PART_BackButton Visibility |
+| `BasePaneButtonStyle` | Style | Button#PART_BackButton Style / Button#PART_ToggleButton Style / Button#PART_AutoSuggestBoxSymbolButton Style |
+| `BoolToVisibilityConverter` | BoolToVisibilityConverter | Button#PART_ToggleButton Visibility |
+| `BottomCompactNavigationViewItemTemplate` | ControlTemplate | 컨트롤.ItemTemplate〔PaneDisplayMode=Bottom〕 |
+| `BottomNavigationViewTemplate` | ControlTemplate | 컨트롤.Template〔PaneDisplayMode=Bottom〕 |
+| `DefaultNavigationViewStyle` | Style | Style BasedOn |
+| `LeftCompactNavigationViewItemTemplate` | ControlTemplate | 컨트롤.ItemTemplate〔PaneDisplayMode=Left〕 |
+| `LeftFluentNavigationViewItemTemplate` | ControlTemplate | 컨트롤.ItemTemplate〔PaneDisplayMode=LeftFluent〕 |
+| `LeftMinimalCompactNavigationViewItemTemplate` | ControlTemplate | 컨트롤.ItemTemplate〔PaneDisplayMode=LeftMinimal〕 |
+| `LeftNavigationViewTemplate` | ControlTemplate | 컨트롤.Template〔PaneDisplayMode=Left〕 / 컨트롤.Template〔PaneDisplayMode=LeftMinimal〕 / 컨트롤.Template〔PaneDisplayMode=LeftFluent〕 |
+| `NavigationViewItemDefaultStyle` | Style | Style BasedOn |
+| `TopCompactNavigationViewItemTemplate` | ControlTemplate | 컨트롤.ItemTemplate〔PaneDisplayMode=Top〕 |
+| `TopNavigationViewTemplate` | ControlTemplate | 컨트롤.Template〔PaneDisplayMode=Top〕 |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 선택·확장할 수 있는 스타일 키
+
+| 키 | 대상 | 정의 |
+| --- | --- | --- |
+| `DefaultNavigationViewStyle` | `controls:NavigationView` | [NavigationView.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationView.xaml) |
+
+`Style="{StaticResource 키}"`로 선택하거나 새 Style의 BasedOn에 연결합니다. TargetType이 맞아야 하며 정의 파일이 실제 리소스 범위에 로드되어 있어야 합니다. 접두사 Default가 붙은 키도 앱에서 선택할 수 있지만 내부 구현 변경에 영향을 받을 수 있습니다.
+
+### 템플릿을 바꿀 때 유지할 연결
+
+C# 구현이 이름으로 찾는 부분: `PART_AutoSuggestBoxSymbolButton`, `PART_BackButton`, `PART_FooterMenuItemsItemsControl`, `PART_MenuItemsItemsControl`, `PART_NavigationViewContentPresenter`, `PART_ToggleButton`. 이름과 요소 타입·명령·이벤트 연결을 함께 유지합니다.
+
+원본 템플릿에 정의된 PART: `PART_AutoSuggestBoxSymbolButton` (Button), `PART_BackButton` (Button), `PART_FooterMenuItemsItemsControl` (ItemsControl), `PART_FooterSeparator` (Border), `PART_MenuItemsItemsControl` (ItemsControl), `PART_NavigationViewContentPresenter` (NavigationViewContentPresenter), `PART_ScrollViewer` (DynamicScrollViewer), `PART_ToggleButton` (Button), `PART_TopSeparator` (Border). WPF 기반 클래스가 사용하는 연결도 보존합니다.
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| `BottomNavigationViewTemplate` | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) · 사전 루트 |
+| `LeftNavigationViewTemplate` | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) · 사전 루트 |
+| `TopNavigationViewTemplate` | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) · 사전 루트 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `Header` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `HeaderVisibility` | `ContentPresenter.Visibility` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `Padding` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.Margin` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `Transition` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.Transition` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `TransitionDuration` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.TransitionDuration` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `ContentOverlay` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `IsBackEnabled` | `Button#PART_BackButton.IsEnabled` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `IsBackButtonVisible` | `Button#PART_BackButton.Visibility` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `PaneHeader` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `AutoSuggestBox` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `PaneFooter` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `OpenPaneLength` | `Grid#PaneGrid.Width` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `IsBackEnabled` | `Button#PART_BackButton.IsEnabled` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `IsBackButtonVisible` | `Button#PART_BackButton.Visibility` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `IsPaneToggleVisible` | `Button#PART_ToggleButton.Visibility` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `PaneTitle` | `TextBlock.Text` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `PaneHeader` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `AutoSuggestBox` | `ContentPresenter#AutoSuggestBoxContentPresenter.Content` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `AutoSuggestBox.Icon` | `Button#PART_AutoSuggestBoxSymbolButton.Icon` | Binding to TemplatedParent | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `PaneFooter` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `FrameMargin` | `Border.Margin` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Header` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `HeaderVisibility` | `ContentPresenter.Visibility` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Padding` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.Padding` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Transition` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.Transition` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `TransitionDuration` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.TransitionDuration` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `ContentOverlay` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `OpenPaneLength` | `DoubleAnimation.To` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `OpenPaneLength` | `DoubleAnimation.From` | TemplateBinding | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `IsBackEnabled` | `Button#PART_BackButton.IsEnabled` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `IsBackButtonVisible` | `Button#PART_BackButton.Visibility` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `PaneHeader` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `AutoSuggestBox` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `PaneFooter` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `Header` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `HeaderVisibility` | `ContentPresenter.Visibility` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `Padding` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.Padding` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `Transition` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.Transition` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `TransitionDuration` | `NavigationViewContentPresenter#PART_NavigationViewContentPresenter.TransitionDuration` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `ContentOverlay` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `컨트롤.Background` | `Transparent` | 직접 지정 / 현재 템플릿 | [NavigationView.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationView.xaml) |
+| `컨트롤.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationView.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationView.xaml) |
+| `컨트롤.Padding` | `0` | 직접 지정 / 현재 템플릿 | [NavigationView.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationView.xaml) |
+| `RowDefinition.Height` | `*` | 직접 지정 / 현재 템플릿 | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `RowDefinition.Height` | `Auto` | 직접 지정 / 현재 템플릿 | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `ContentPresenter.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `ColumnDefinition.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `ColumnDefinition.Width` | `*` | 직접 지정 / 현재 템플릿 | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `StackPanel.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationViewBottom.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBottom.xaml) |
+| `ColumnDefinition.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `ColumnDefinition.Width` | `*` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Grid#PaneGrid.Margin` | `4,0` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `RowDefinition.Height` | `Auto` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `RowDefinition.Height` | `*` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Button#PART_BackButton.Margin` | `0,5,0,5` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Button#PART_ToggleButton.Margin` | `0,0,0,5` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `ContentPresenter.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `ContentPresenter#AutoSuggestBoxContentPresenter.Margin` | `0,0,0,6` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Button#PART_AutoSuggestBoxSymbolButton.Margin` | `0,0,0,6` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Border#PART_TopSeparator.Height` | `1` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Border#PART_TopSeparator.Margin` | `0,4,0,4` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `DynamicScrollViewer#PART_ScrollViewer.Margin` | `0,0,-4,0` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `DynamicScrollViewer#PART_ScrollViewer.Padding` | `0,0,4,0` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `StackPanel.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Border#PART_FooterSeparator.Height` | `1` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Border#PART_FooterSeparator.Margin` | `0,4,0,4` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `ItemsControl#PART_FooterMenuItemsItemsControl.Margin` | `0,0,0,4` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Border.BorderThickness` | `1,1,0,0` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `Border.CornerRadius` | `8,0,0,0` | 직접 지정 / 현재 템플릿 | [NavigationViewCompact.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewCompact.xaml) |
+| `RowDefinition.Height` | `Auto` | 직접 지정 / 현재 템플릿 | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `RowDefinition.Height` | `*` | 직접 지정 / 현재 템플릿 | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `ColumnDefinition.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `ColumnDefinition.Width` | `*` | 직접 지정 / 현재 템플릿 | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `ContentPresenter.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+| `StackPanel.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationViewTop.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewTop.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+### C# 코드가 직접 조회하는 리소스
+
+| 키 | 실제 조회 코드 | 소스 |
+| --- | --- | --- |
+| `NavigationViewItemDataTemplate` | `UiApplication.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;` | [NavigationView.Properties.cs](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationView.Properties.cs) |
+
+`Application.Current.Resources`를 직접 읽으면 개별 컨트롤 Resources의 같은 키가 대신 사용되는 것은 아닙니다. 조회 시점이 생성자라면 이후 리소스 변경도 자동 바인딩으로 해석하지 않습니다.
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

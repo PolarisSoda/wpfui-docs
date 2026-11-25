@@ -6,8 +6,14 @@ WPF UI 컨트롤을 **무엇에 쓰는지, 어떤 요소로 구성되는지, 속
 
 컨트롤·뷰·아이콘 기반 타입 **105개**를 각각 `컨트롤이름.md`로 제공합니다. 이 중 WPF-UI 공개 클래스는 75개이며 직접 선언한 공개 속성 312개(인스턴스 311개·정적 1개)를 설명합니다. 기본 WPF 타입은 테마와 함께 실제 사용되는 핵심 상속 속성을 설명합니다.
 
+반지름·색·여백처럼 **Resources·Style·Template로 바꾸는 방법**도 각 페이지의 「속성 외에 모양을 바꾸는 방법」에서 설명합니다. 리소스 정의 881개를 조사하고 조정 예제 70개를 추가했습니다. 동적·정적 참조, 스타일 선택, 고정값·상태 트리거를 구분하므로 이름만 보고 적용되지 않는 키를 찾느라 시간을 쓰지 않도록 돕습니다.
+
 ## 먼저 읽기
 
+- [Resources·Style·Template로 모양 조정하기](CustomizationGuide.md)
+- [105개 컨트롤별 조정 방법 조사](CustomizationIndex.md)
+- [리소스 키 전체 사전: 타입·기본값·사용처](ResourceCatalog.md)
+- [실행 가능한 커스터마이징 예제](examples/CustomizationLab/README.md)
 - [시작하기: 설치·리소스·네임스페이스](GettingStarted.md)
 - [공통 속성: 크기·여백·스타일·바인딩](CommonProperties.md)
 - [탐색 화면 만들기](NavigationGuide.md)

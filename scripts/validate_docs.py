@@ -11,7 +11,7 @@ root=Path(__file__).resolve().parents[1]
 manifest=json.loads((root/'source-manifest.json').read_text(encoding='utf-8'))
 errors=[];links=0;props=0;xmls=0
 for file in root.rglob('*.md'):
-    if any(x in file.parts for x in ['.git','.checks','bin','obj']):continue
+    if any(x in file.parts for x in ['.git','.checks','.customization-checks','bin','obj']):continue
     text=file.read_text(encoding='utf-8')
     if len(re.findall(r'^```',text,re.M))%2:errors.append(f'{file.name}: unclosed fence')
     plain=re.sub(r'```.*?```','',text,flags=re.S)
@@ -40,6 +40,25 @@ for page in manifest['pages']:
         for prop in page['properties']:
             source=(args.source/prop['file']).read_text(encoding='utf-8-sig')
             if not re.search(r'\b'+re.escape(prop['name'])+r'\b',source):errors.append('Source property missing '+prop['name'])
+audit_file=root/'customization-manifest.json'
+if audit_file.exists():
+    audit=json.loads(audit_file.read_text(encoding='utf-8'))
+    if len(audit['controls'])!=len(manifest['pages']):errors.append('Customization control count mismatch')
+    for control in audit['controls']:
+        page=(root/(control['name']+'.md')).read_text(encoding='utf-8')
+        if '<!-- customization:start -->' not in page:errors.append('Missing customization section '+control['name'])
+        for resource in control['resources']:
+            if '`'+resource['key']+'`' not in page:errors.append('Missing resource '+control['name']+'.'+resource['key'])
+        if args.source:
+            for resource in control['resources']:
+                for use in resource['uses']:
+                    source=(args.source/use['file']).read_text(encoding='utf-8-sig')
+                    if resource['key'] not in source:errors.append('Invalid resource source '+resource['key'])
+    examples=json.loads((root/'customization-examples.json').read_text(encoding='utf-8'))
+    for ex in examples:
+        text=(root/(ex['page']+'.md')).read_text(encoding='utf-8')
+        kind='csharp-only' if ex['kind']=='csharp' else 'example'
+        if '<!-- customization:'+kind+' '+ex['id']+' -->' not in text:errors.append('Missing example '+ex['id'])
 if errors:
     print('\n'.join(errors));sys.exit(1)
 print(f'PASS: {len(manifest["pages"])} control/view pages, {props} declared properties, {links} relative links, {xmls} XML examples')

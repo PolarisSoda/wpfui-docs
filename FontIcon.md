@@ -1,6 +1,6 @@
 # FontIcon
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 지정한 글꼴의 유니코드 글리프를 아이콘으로 표시합니다.
 
@@ -42,6 +42,23 @@ Demo.FontSize = 32;
 | `Foreground` | [IconElement](IconElement.md) | 아이콘에 적용할 전경 브러시입니다. 글꼴 기반 아이콘에 색을 주며, 비트맵 자체의 픽셀색을 다시 칠하는 속성은 아닙니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+기본 생성자는 `UiApplication.Current.Resources["DefaultIconFontSize"]`를 읽습니다. FontIcon.Resources만 재정의하는 경로가 아니라 앱 리소스 조회입니다. 개별 아이콘 크기는 공개 FontSize를 직접 설정하는 방법이 확실합니다. 사용자 폰트는 FontFamily·Glyph를 함께 맞춥니다.
+
+### C# 코드가 직접 조회하는 리소스
+
+| 키 | 실제 조회 코드 | 소스 |
+| --- | --- | --- |
+| `DefaultIconFontSize` | `SetCurrentValue(FontSizeProperty, UiApplication.Current.Resources["DefaultIconFontSize"]);` | [FontIcon.cs](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/IconElement/FontIcon.cs) |
+
+`Application.Current.Resources`를 직접 읽으면 개별 컨트롤 Resources의 같은 키가 대신 사용되는 것은 아닙니다. 조회 시점이 생성자라면 이후 리소스 변경도 자동 바인딩으로 해석하지 않습니다.
+
+<!-- customization:end -->
 
 ## 동작과 주의 사항
 

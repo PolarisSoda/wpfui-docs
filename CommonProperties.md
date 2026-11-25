@@ -2,6 +2,8 @@
 
 [전체 목차](README.md) · [시작하기](GettingStarted.md)
 
+**속성에 없는 모양을 조정하려면 [Resources·Style·Template 안내](CustomizationGuide.md)를 먼저 확인합니다.** 각 컨트롤 문서에는 DynamicResource·StaticResource 참조 키, 실제 내부 요소 연결, 고정값·트리거 조건과 추가 예제를 보완했습니다. Card 반지름처럼 Resources 재정의로 바꿀 수 있는 경우와 Footer·선택 스타일에 따라 템플릿 수정이 필요한 경우를 구별합니다.
+
 여기서는 컨트롤별 문서에서 반복하지 않는 기본 WPF 규칙을 설명합니다. 모든 타입이 아래 속성을 전부 갖는 것은 아닙니다. 예를 들어 GridViewColumn·IconSource는 FrameworkElement가 아니므로 Margin·Width·DataContext가 같은 방식으로 제공되지 않습니다.
 
 ## 크기와 배치

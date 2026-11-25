@@ -1,6 +1,6 @@
 # TitleBar
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 사용자 지정 창 제목 영역과 시스템 창 버튼을 제공합니다.
 
@@ -53,6 +53,95 @@ Demo.HelpClicked += (_, _) => Demo.Title = "도움말 요청";
 | `MinimizeActionOverride` | `Action<TitleBar, System.Windows.Window>?` | 읽기·쓰기 | `기존 DP 메타데이터 / CLR 계산값` | 최소화 버튼 기본 동작을 대체할 C# 콜백입니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+제목·중앙·우측 슬롯은 공개 Title·Header·CenterContent·TrailingContent를 사용합니다. 시스템 버튼 색은 ButtonsForeground·ButtonsBackground이며 버튼 템플릿에는 고정된 글리프·크기와 닫기 강조색도 있습니다. TitleBar.Resources에 일반 Button 색을 바꾼다고 모든 시스템 버튼 상태가 같은 색으로 변하지 않습니다.
+
+### 이 컨트롤의 Resources에서 바꾸기
+
+`ButtonForeground`는 `SolidColorBrush` 타입의 DynamicResource 참조입니다. 아래는 해당 키가 참조되는 기본 템플릿·상태에 적용하는 예제입니다. 기존 로컬 속성값·사용자 Style이 이 경로를 대체했다면 해당 설정도 확인합니다.
+
+<!-- customization:example TitleBar_Resources -->
+```xml
+<ui:TitleBar Title="문서 편집기" ShowHelp="True" x:Name="ResourceDemo">
+    <ui:TitleBar.Resources>
+        <SolidColorBrush x:Key="ButtonForeground" Color="#2563EB" />
+    </ui:TitleBar.Resources>
+    <ui:TitleBar.CenterContent><TextBlock Text="프로젝트 A" /></ui:TitleBar.CenterContent>
+</ui:TitleBar>
+```
+
+```csharp
+ResourceDemo.Resources["ButtonForeground"] = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(37, 99, 235));
+```
+
+<!-- customization:example-end -->
+
+C# 조각은 위 XAML과 같은 창·뷰에서 실행합니다. Resources에 넣는 값의 **타입**을 유지해야 합니다. 자식 컨트롤도 같은 키를 조회하면 영향을 받을 수 있습니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `ButtonForeground` | SolidColorBrush | 컨트롤.Foreground / 컨트롤.ButtonsForeground |
+| `DefaultControlFocusVisualStyle` | Style | 컨트롤.FocusVisualStyle |
+| `PaletteRedBrush` | SolidColorBrush | TitleBarButton#PART_CloseButton MouseOverBackground |
+
+### 템플릿을 바꿀 때 유지할 연결
+
+C# 구현이 이름으로 찾는 부분: `PART_CloseButton`, `PART_HelpButton`, `PART_Icon`, `PART_MainGrid`, `PART_MaximizeButton`, `PART_MinimizeButton`, `PART_RestoreButton`. 이름과 요소 타입·명령·이벤트 연결을 함께 유지합니다.
+
+원본 템플릿에 정의된 PART: `PART_CloseButton` (TitleBarButton), `PART_HelpButton` (TitleBarButton), `PART_Icon` (ContentPresenter), `PART_MainGrid` (Grid), `PART_MaximizeButton` (TitleBarButton), `PART_MinimizeButton` (TitleBarButton). WPF 기반 클래스가 사용하는 연결도 보존합니다.
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `HorizontalAlignment` | `Grid#PART_MainGrid.HorizontalAlignment` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `VerticalContentAlignment` | `Grid#PART_MainGrid.VerticalAlignment` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `Background` | `Grid#PART_MainGrid.Background` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `Padding` | `Grid#TitleGrid.Margin` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `Icon` | `ContentPresenter#PART_Icon.Content` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `Header` | `ContentPresenter.Content` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `HorizontalContentAlignment` | `ContentPresenter.HorizontalAlignment` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `VerticalContentAlignment` | `ContentPresenter.VerticalAlignment` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `CenterContent` | `ContentPresenter.Content` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `TrailingContent` | `ContentPresenter.Content` | TemplateBinding | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `컨트롤.Background` | `Transparent` | 직접 지정 / 현재 템플릿 | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `컨트롤.Padding` | `16,4,16,4` | 직접 지정 / 현재 템플릿 | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `컨트롤.FontSize` | `12` | 직접 지정 / 현재 템플릿 | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `컨트롤.Height` | `48` | 직접 지정 / 현재 템플릿 | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `ColumnDefinition.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `ColumnDefinition.Width` | `*` | 직접 지정 / 현재 템플릿 | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `ContentPresenter#PART_Icon.Height` | `16` | 직접 지정 / 현재 템플릿 | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+| `PART_Icon.Margin` | `0` | Icon={x:Null} | [TitleBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/TitleBar/TitleBar.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

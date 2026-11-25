@@ -1,6 +1,6 @@
 # InfoBar
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 페이지 안에 유지되는 정보·성공·경고·오류 메시지입니다.
 
@@ -53,6 +53,120 @@ Demo.IsOpen = true;
 - `InfoBarSeverity`: `Informational`, `Success`, `Warning`, `Error`.
 
 열거형 이름이 비슷해도 다른 타입일 수 있습니다. [열거형 안내](Enums.md)에서 의미를 비교할 수 있습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+ControlCornerRadius는 기본 테두리로 연결됩니다. Severity별 배경·테두리·아이콘 색은 InfoBarInformational/Success/Warning/Error 계열 키로 나뉘며 ContentBorder에 직접 적용되는 트리거도 있습니다. 컨트롤 Background 하나만 바꾸면 모든 Severity 상태가 바뀌는 구조는 아닙니다.
+
+### 이 컨트롤의 Resources에서 바꾸기
+
+`ControlCornerRadius`는 `CornerRadius` 타입의 DynamicResource 참조입니다. 아래는 해당 키가 참조되는 기본 템플릿·상태에 적용하는 예제입니다. 기존 로컬 속성값·사용자 Style이 이 경로를 대체했다면 해당 설정도 확인합니다.
+
+<!-- customization:example InfoBar_Resources -->
+```xml
+<ui:InfoBar IsOpen="True" Severity="Warning" Title="연결 끊김" Message="네트워크를 확인하세요." IsClosable="True"  x:Name="ResourceDemo">
+    <ui:InfoBar.Resources>
+        <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+    </ui:InfoBar.Resources>
+</ui:InfoBar>
+```
+
+```csharp
+ResourceDemo.Resources["ControlCornerRadius"] = new System.Windows.CornerRadius(12);
+```
+
+<!-- customization:example-end -->
+
+C# 조각은 위 XAML과 같은 창·뷰에서 실행합니다. Resources에 넣는 값의 **타입**을 유지해야 합니다. 자식 컨트롤도 같은 키를 조회하면 영향을 받을 수 있습니다.
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `ControlCornerRadius` | CornerRadius | 컨트롤.Border.CornerRadius |
+| `ControlContentThemeFontSize` | Double | 컨트롤.FontSize |
+| `ControlFillColorDefault` | Color | SolidColorBrush Color |
+| `InfoBarBorderBrush` | SolidColorBrush | 컨트롤.BorderBrush |
+| `InfoBarErrorSeverityBackgroundBrush` | SolidColorBrush | ContentBorder.Background〔Severity=Error〕 |
+| `InfoBarErrorSeverityBorderBrush` | SolidColorBrush | ContentBorder.BorderBrush〔Severity=Error〕 |
+| `InfoBarErrorSeverityIconBackground` | SolidColorBrush | SymbolIcon.Foreground〔Severity=Error〕 |
+| `InfoBarInformationalSeverityBackgroundBrush` | SolidColorBrush | ContentBorder.Background〔Severity=Informational〕 |
+| `InfoBarInformationalSeverityBorderBrush` | SolidColorBrush | ContentBorder.BorderBrush〔Severity=Informational〕 |
+| `InfoBarSuccessSeverityBackgroundBrush` | SolidColorBrush | ContentBorder.Background〔Severity=Success〕 |
+| `InfoBarSuccessSeverityBorderBrush` | SolidColorBrush | ContentBorder.BorderBrush〔Severity=Success〕 |
+| `InfoBarSuccessSeverityIconBackground` | SolidColorBrush | SymbolIcon.Foreground〔Severity=Success〕 |
+| `InfoBarTitleForeground` | SolidColorBrush | 컨트롤.Foreground |
+| `InfoBarWarningSeverityBackgroundBrush` | SolidColorBrush | ContentBorder.Background〔Severity=Warning〕 |
+| `InfoBarWarningSeverityBorderBrush` | SolidColorBrush | ContentBorder.BorderBrush〔Severity=Warning〕 |
+| `InfoBarWarningSeverityIconBackground` | SolidColorBrush | SymbolIcon.Foreground〔Severity=Warning〕 |
+| `SystemAccentColorSecondary` | Color | SolidColorBrush Color〔Severity=Informational〕 |
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `InfoBarBorderThemeThickness` | Thickness | 컨트롤.BorderThickness |
+| `InfoBarPadding` | Thickness | 컨트롤.Padding |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 템플릿을 바꿀 때 유지할 연결
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `HorizontalAlignment` | `Border#ContentBorder.HorizontalAlignment` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `VerticalAlignment` | `Border#ContentBorder.VerticalAlignment` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Background` | `Border#ContentBorder.Background` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `BorderBrush` | `Border#ContentBorder.BorderBrush` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `BorderThickness` | `Border#ContentBorder.BorderThickness` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Border.CornerRadius` | `Border#ContentBorder.CornerRadius` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Title` | `TextBlock#TitleText.Text` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `FontSize` | `TextBlock#TitleText.TextElement.FontSize` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Message` | `TextBlock.Text` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `FontSize` | `TextBlock.TextElement.FontSize` | TemplateBinding | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `TemplateButtonCommand` | `Button#CloseButton.Command` | Binding to TemplatedParent | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `Border#ContentBorder.Padding` | `16,12` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `ColumnDefinition.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `ColumnDefinition.Width` | `*` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Border.Margin` | `0,2,14,0` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `SymbolIcon#SymbolIcon.FontSize` | `16` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `TextBlock#TitleText.Margin` | `0,0,14,0` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `TextBlock.Margin` | `0` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Border.Margin` | `12,-2,0,0` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Button#CloseButton.Padding` | `4` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Button#CloseButton.Background` | `Transparent` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+| `Button#CloseButton.BorderThickness` | `0` | 직접 지정 / 현재 템플릿 | [InfoBar.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/InfoBar/InfoBar.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

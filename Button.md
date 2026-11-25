@@ -1,6 +1,6 @@
 # Button
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 아이콘과 의미별 색상을 지원하는 실행 버튼입니다. 클릭 한 번으로 작업을 수행할 때 사용합니다.
 
@@ -59,6 +59,198 @@ Demo.IsEnabled = false;
 - `ControlAppearance`: `Primary`, `Secondary`, `Info`, `Dark`, `Light`, `Danger`, `Success`, `Caution`, `Transparent`.
 
 열거형 이름이 비슷해도 다른 타입일 수 있습니다. [열거형 안내](Enums.md)에서 의미를 비교할 수 있습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+모서리는 공개 `CornerRadius` 속성으로 직접 바꾸거나 `Resources["ControlCornerRadius"]`로 기본 스타일 값을 바꿀 수 있습니다. 상태별 색까지 맞추려면 Normal·PointerOver·Pressed·Disabled 키를 구분합니다. `Appearance=Primary`는 AccentButton 계열, `Secondary`는 Button 계열의 색을 주로 사용하므로 ButtonBackground만 바꾸어 Primary 버튼 색이 바뀐다고 가정하지 않습니다. 직접 지정한 Background·CornerRadius 로컬 값은 스타일의 리소스 경로보다 우선할 수 있습니다.
+
+### 이 컨트롤의 Resources에서 바꾸기
+
+`ControlCornerRadius`는 `CornerRadius` 타입의 DynamicResource 참조입니다. 아래는 해당 키가 참조되는 기본 템플릿·상태에 적용하는 예제입니다. 기존 로컬 속성값·사용자 Style이 이 경로를 대체했다면 해당 설정도 확인합니다.
+
+<!-- customization:example Button_Resources -->
+```xml
+<ui:Button Content="저장" Appearance="Primary" x:Name="ResourceDemo">
+    <ui:Button.Resources>
+        <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+    </ui:Button.Resources>
+    <ui:Button.Icon><ui:SymbolIcon Symbol="Save24" /></ui:Button.Icon>
+</ui:Button>
+```
+
+```csharp
+ResourceDemo.Resources["ControlCornerRadius"] = new System.Windows.CornerRadius(12);
+```
+
+<!-- customization:example-end -->
+
+C# 조각은 위 XAML과 같은 창·뷰에서 실행합니다. Resources에 넣는 값의 **타입**을 유지해야 합니다. 자식 컨트롤도 같은 키를 조회하면 영향을 받을 수 있습니다.
+
+### 상태별 강조색을 한 버튼에 적용
+
+<!-- customization:example Button_Recipe1 -->
+```xml
+<ui:Button Content="저장" Appearance="Primary">
+    <ui:Button.Resources>
+        <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+        <SolidColorBrush x:Key="AccentButtonBackground" Color="#2563EB" />
+        <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="#1D4ED8" />
+        <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="#1E40AF" />
+    </ui:Button.Resources>
+</ui:Button>
+```
+
+<!-- customization:example-end -->
+
+### 재정의할 수 있는 동적 리소스
+
+참조 위치가 보조 스타일·다른 상태에만 있으면 그 스타일·상태를 선택해야 효과가 납니다. 타입은 원본 정의에서 읽었으며 미정의 키는 정상 조정 키로 권장하지 않습니다.
+
+| 키 | 타입 | 쓰이는 영역·조건 |
+| --- | --- | --- |
+| `ControlCornerRadius` | CornerRadius | 컨트롤.CornerRadius / 컨트롤.Border.CornerRadius |
+| `AccentButtonBackground` | SolidColorBrush | 컨트롤.Background〔Appearance=Primary〕 |
+| `AccentButtonBackgroundPointerOver` | SolidColorBrush | 컨트롤.MouseOverBackground〔Appearance=Primary〕 |
+| `AccentButtonBackgroundPressed` | SolidColorBrush | 컨트롤.PressedBackground〔Appearance=Primary〕 |
+| `AccentButtonForeground` | SolidColorBrush | 컨트롤.Foreground〔Appearance=Primary〕 |
+| `AccentButtonForegroundPointerOver` | SolidColorBrush | 컨트롤.PressedForeground〔Appearance=Primary〕 |
+| `AccentControlElevationBorderBrush` | LinearGradientBrush / SolidColorBrush | 컨트롤.BorderBrush〔Appearance=Primary〕 / 컨트롤.MouseOverBorderBrush〔Appearance=Primary〕 / 컨트롤.BorderBrush〔Appearance=Dark〕 / 컨트롤.MouseOverBorderBrush〔Appearance=Dark〕 / 외 8곳 |
+| `ButtonBackground` | SolidColorBrush | 컨트롤.Background |
+| `ButtonBackgroundDisabled` | SolidColorBrush | ContentBorder.Background〔IsEnabled=False〕 / 컨트롤.Background〔IsEnabled=False〕 |
+| `ButtonBackgroundPointerOver` | SolidColorBrush | 컨트롤.MouseOverBackground / ContentBorder.Background〔IsMouseOver=True; IsPressed=False〕 |
+| `ButtonBackgroundPressed` | SolidColorBrush | 컨트롤.PressedBackground / ContentBorder.Background〔IsMouseOver=True; IsPressed=True〕 |
+| `ButtonBorderBrushDisabled` | SolidColorBrush | ContentBorder.BorderBrush〔IsEnabled=False〕 |
+| `ButtonBorderBrushPressed` | SolidColorBrush | 컨트롤.PressedBorderBrush / ContentBorder.BorderBrush〔IsMouseOver=True; IsPressed=True〕 |
+| `ButtonForeground` | SolidColorBrush | 컨트롤.Foreground |
+| `ButtonForegroundDisabled` | SolidColorBrush | 컨트롤.Foreground〔IsEnabled=False〕 / Icon.TextElement.Foreground〔IsEnabled=False〕 / ContentPresenter.TextElement.Foreground〔IsEnabled=False〕 |
+| `ButtonForegroundPressed` | SolidColorBrush | 컨트롤.PressedForeground / ContentPresenter.TextElement.Foreground〔IsMouseOver=True; IsPressed=True〕 |
+| `ControlContentThemeFontSize` | Double | 컨트롤.FontSize |
+| `ControlElevationBorderBrush` | LinearGradientBrush / SolidColorBrush | 컨트롤.BorderBrush / 컨트롤.MouseOverBorderBrush / ContentBorder.BorderBrush〔IsMouseOver=True; IsPressed=False〕 |
+| `ControlFillColorTransparentBrush` | SolidColorBrush | 컨트롤.PressedBorderBrush〔Appearance=Primary〕 |
+| `ControlStrongFillColorDark` | Color | SolidColorBrush Color〔Appearance=Dark〕 |
+| `ControlStrongFillColorLight` | Color | SolidColorBrush Color〔Appearance=Light〕 |
+| `DefaultControlFocusVisualStyle` | Style | 컨트롤.FocusVisualStyle |
+| `PaletteGreenColor` | Color | SolidColorBrush Color〔Appearance=Success〕 |
+| `PaletteLightBlueColor` | Color | SolidColorBrush Color〔Appearance=Info〕 |
+| `PaletteOrangeColor` | Color | SolidColorBrush Color〔Appearance=Caution〕 |
+| `PaletteRedColor` | Color | SolidColorBrush Color〔Appearance=Danger〕 |
+| `SubtleFillColorSecondaryBrush` | SolidColorBrush | LayoutRoot.Background〔IsMouseOver=True〕 |
+| `SubtleFillColorTertiaryBrush` | SolidColorBrush | LayoutRoot.Background〔IsPressed=True〕 |
+| `TextFillColorDarkPrimaryBrush` | SolidColorBrush | 컨트롤.Foreground〔Appearance=Light〕 |
+| `TextFillColorDarkSecondaryBrush` | SolidColorBrush | 컨트롤.PressedForeground〔Appearance=Light〕 |
+| `TextFillColorLightPrimaryBrush` | SolidColorBrush | 컨트롤.Foreground〔Appearance=Dark〕 / 컨트롤.Foreground〔Appearance=Info〕 |
+| `TextFillColorLightSecondaryBrush` | SolidColorBrush | 컨트롤.PressedForeground〔Appearance=Dark〕 |
+
+<details>
+<summary>정적 리소스 참조 — 인스턴스 Resources 재정의 보장 대상 아님</summary>
+
+| 키 | 타입 | 쓰이는 위치 |
+| --- | --- | --- |
+| `ButtonBorderThemeThickness` | Thickness | 컨트롤.BorderThickness |
+| `ButtonIconMargin` | Thickness | ContentPresenter#ControlIcon Margin |
+| `ButtonPadding` | Thickness | 컨트롤.Padding |
+| `DefaultButtonStyle` | Style | Style BasedOn |
+| `DefaultRepeatButtonStyle` | Style | Style BasedOn |
+| `DefaultUiButtonStyle` | Style | Style BasedOn |
+| `PaneToggleButtonHeight` | Double | 컨트롤.MinHeight |
+| `PaneToggleButtonThickness` | Thickness | 컨트롤.BorderThickness |
+| `PaneToggleButtonWidth` | Double | 컨트롤.MinWidth |
+
+StaticResource는 라이브러리 사전·템플릿을 읽는 시점에 값이 정해질 수 있습니다. 같은 이름을 Control.Resources에 넣으면 반드시 바뀐다고 해석하지 않습니다. 공개 속성·Style.Setter로 바꾸거나 원본 템플릿을 복제해 해당 참조를 DynamicResource·TemplateBinding으로 바꿉니다.
+
+</details>
+
+### 선택·확장할 수 있는 스타일 키
+
+| 키 | 대상 | 정의 |
+| --- | --- | --- |
+| `DefaultUiButtonStyle` | `controls:Button` | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `BasePaneButtonStyle` | `controls:Button` | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+
+`Style="{StaticResource 키}"`로 선택하거나 새 Style의 BasedOn에 연결합니다. TargetType이 맞아야 하며 정의 파일이 실제 리소스 범위에 로드되어 있어야 합니다. 접두사 Default가 붙은 키도 앱에서 선택할 수 있지만 내부 구현 변경에 영향을 받을 수 있습니다.
+
+### 템플릿을 바꿀 때 유지할 연결
+
+| 템플릿 키 | 소스·범위 |
+| --- | --- |
+| (Style 내부 템플릿) | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) · 내부 정의 |
+| (Style 내부 템플릿) | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) · 내부 정의 |
+
+리소스·속성으로 해결되지 않는 모서리 분할·고정 크기·구조 변경은 ControlTemplate 전체를 복제해 수정합니다. 기존 템플릿의 일부 시각 자식만 Style.Setter로 교체하는 기능은 없습니다.
+
+<details>
+<summary>공개 속성·붙임 DP가 내부 요소에 연결되는 위치</summary>
+
+| 입력 속성 | 내부 반영 위치 | 연결 방식 | 정의 |
+| --- | --- | --- | --- |
+| `Width` | `Border#ContentBorder.Width` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `Height` | `Border#ContentBorder.Height` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `MinWidth` | `Border#ContentBorder.MinWidth` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `MinHeight` | `Border#ContentBorder.MinHeight` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `HorizontalAlignment` | `Border#ContentBorder.HorizontalAlignment` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `VerticalAlignment` | `Border#ContentBorder.VerticalAlignment` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `Background` | `Border#ContentBorder.Background` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `BorderBrush` | `Border#ContentBorder.BorderBrush` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `CornerRadius` | `Border#ContentBorder.CornerRadius` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `Padding` | `Border#InsetBorder.Padding` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `BorderThickness` | `Border#InsetBorder.BorderThickness` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `CornerRadius` | `Border#InsetBorder.CornerRadius` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `HorizontalContentAlignment` | `Grid.HorizontalAlignment` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `VerticalContentAlignment` | `Grid.VerticalAlignment` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `Icon` | `ContentPresenter#ControlIcon.Content` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `FontSize` | `ContentPresenter#ControlIcon.TextElement.FontSize` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `Foreground` | `ContentPresenter#ControlIcon.TextElement.Foreground` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `Content` | `ContentPresenter#ContentPresenter.Content` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `ContentTemplate` | `ContentPresenter#ContentPresenter.ContentTemplate` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `Foreground` | `ContentPresenter#ContentPresenter.TextElement.Foreground` | TemplateBinding | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `MinWidth` | `Border#LayoutRoot.MinWidth` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `MinHeight` | `Border#LayoutRoot.MinHeight` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Padding` | `Border#LayoutRoot.Padding` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `HorizontalAlignment` | `Border#LayoutRoot.HorizontalAlignment` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `VerticalAlignment` | `Border#LayoutRoot.VerticalAlignment` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `BorderBrush` | `Border#LayoutRoot.BorderBrush` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `BorderThickness` | `Border#LayoutRoot.BorderThickness` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Border.CornerRadius` | `Border#LayoutRoot.CornerRadius` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Icon` | `ContentPresenter#Icon.Content` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Foreground` | `ContentPresenter#Icon.TextElement.Foreground` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Content` | `ContentPresenter.Content` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `ContentTemplate` | `ContentPresenter.ContentTemplate` | TemplateBinding | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+
+</details>
+
+<details>
+<summary>템플릿·상태 트리거의 고정값 — 리소스 변경으로 바뀌지 않는 부분</summary>
+
+| 위치 | 고정값 | 적용 조건 | 정의 |
+| --- | --- | --- | --- |
+| `Border#ContentBorder.BorderThickness` | `0` | 직접 지정 / 현재 템플릿 | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `ColumnDefinition.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `ColumnDefinition.Width` | `*` | 직접 지정 / 현재 템플릿 | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `컨트롤.Background` | `Transparent` | Appearance=Transparent | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `InsetBorder.BorderThickness` | `0` | Appearance=Secondary | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `ControlIcon.Margin` | `0` | Content={x:Null} | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `ControlIcon.Margin` | `0` | Content= | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `ControlIcon.Margin` | `0` | Icon={x:Null} | [Button.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/Button/Button.xaml) |
+| `컨트롤.Background` | `Transparent` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `컨트롤.FontSize` | `16` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `컨트롤.Padding` | `10` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Border#LayoutRoot.Margin` | `0` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Border#LayoutRoot.Background` | `Transparent` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `ColumnDefinition#GridColumn1.Width` | `Auto` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `ColumnDefinition#GridColumn2.Width` | `*` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `ContentPresenter#Icon.Margin` | `0,0,20,0` | 직접 지정 / 현재 템플릿 | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `Icon.Margin` | `0` | Content={x:Null} | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `GridColumn1.Width` | `*` | Content={x:Null} | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+| `GridColumn2.Width` | `0` | Content={x:Null} | [NavigationViewBasePaneButtonStyle.xaml](https://github.com/lepoco/wpfui/blob/153baadeaf475875a81a4605881ca5c2dbe53972/src/Wpf.Ui/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml) |
+
+표는 고정값이 있다는 근거입니다. 컨트롤 자체의 로컬 속성으로 덮을 수 있는 최상위 Setter와 내부 요소·트리거의 값을 구분합니다. `RadiusX`·`RadiusY`는 Rectangle의 반지름이며 Border.CornerRadius와 다른 속성입니다.
+
+</details>
+
+<!-- customization:end -->
 
 ## 기본 스타일에서 설정하는 값
 

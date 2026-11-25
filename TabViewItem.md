@@ -1,6 +1,6 @@
 # TabViewItem
 
-[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md)
+[전체 목차](README.md) · [시작하기](GettingStarted.md) · [공통 속성](CommonProperties.md) · [Resources·스타일](#속성-외에-모양을-바꾸는-방법)
 
 기본 WPF TabControl·TabItem을 감싼 탭 항목입니다. 4.3.0에는 추가 고유 속성이 없습니다.
 
@@ -38,6 +38,29 @@ Demo.IsSelected = true;
 | `IsSelected` | `bool` | 이 탭이 선택되어 본문이 표시되는지 정합니다. |
 
 크기·여백·표시 여부·활성화·바인딩의 공통 규칙은 [CommonProperties.md](CommonProperties.md)를 참고합니다. 기본 WPF 전체 상속 API를 재수록하지는 않습니다.
+
+<!-- customization:start -->
+## 속성 외에 모양을 바꾸는 방법
+
+[리소스·스타일·템플릿 사용법](CustomizationGuide.md) · [전체 리소스 사전](ResourceCatalog.md)
+
+TabItem 파생 빈 클래스입니다. WPF TabItem용 테마를 사용하려면 TabViewItem용 Style의 BasedOn으로 기본 TabItem 스타일을 명시적으로 연결할 수 있습니다. Header·Content·IsSelected는 상속 속성이고 탭 닫기·드래그 재정렬은 별도 구현입니다.
+
+### TabItem 스타일을 기반으로 사용
+
+<!-- customization:example TabViewItem_Recipe1 -->
+```xml
+<ui:TabViewItem Header="문서">
+    <ui:TabViewItem.Style>
+        <Style TargetType="{x:Type ui:TabViewItem}" BasedOn="{StaticResource {x:Type TabItem}}" />
+    </ui:TabViewItem.Style>
+    <TextBlock Text="문서 본문" />
+</ui:TabViewItem>
+```
+
+<!-- customization:example-end -->
+
+<!-- customization:end -->
 
 ## 동작과 주의 사항
 
